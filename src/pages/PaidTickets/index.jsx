@@ -1,4 +1,5 @@
 import { DatePicker } from "antd";
+import moment from "moment";
 
 import { PageTitle, PageTable } from "components";
 
@@ -50,6 +51,7 @@ const data = [
   },
 ];
 
+const dateFormat = "YYYY-MM-DD";
 const PaidTickets = () => {
   return (
     <>
@@ -64,7 +66,13 @@ const PaidTickets = () => {
         onAddClick={() => alert("추가")}
         onRemoveClick={(selected) => console.log(selected)}
       >
-        <DatePicker.RangePicker placeholder={["시작 날짜", "마지막 날짜"]} />
+        <DatePicker.RangePicker
+          placeholder={["시작 날짜", "마지막 날짜"]}
+          defaultValue={[
+            moment(moment().subtract(1, "months"), dateFormat),
+            moment(new Date(), dateFormat),
+          ]}
+        />
       </PageTable>
     </>
   );
