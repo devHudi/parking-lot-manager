@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Button, Input, Select, Modal } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, BarcodeOutlined } from "@ant-design/icons";
 
 import { PageTitle, PageTable } from "components";
 
@@ -102,7 +102,7 @@ const Rooms = () => {
         onAddClick={() => alert("추가")}
         onRemoveClick={(selected) => console.log(selected)}
       >
-        <Button type="primary" onClick={showConfirm}>
+        <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
           금월 주차권 지급
         </Button>
         <Select

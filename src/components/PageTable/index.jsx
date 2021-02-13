@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Table, Button } from "antd";
+import { FileAddOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { SpaceBetween } from "components";
 
@@ -20,10 +21,18 @@ const PageTable = ({
       {!noButtons && (
         <SpaceBetween style={{ marginBottom: "10px" }}>
           <SpaceBetween.Box>
-            <Button type="primary" onClick={onAddClick}>
+            <Button
+              type="primary"
+              icon={<FileAddOutlined />}
+              onClick={onAddClick}
+            >
               {name} 추가
             </Button>
-            <Button type="danger" onClick={() => onRemoveClick(selected)}>
+            <Button
+              type="danger"
+              icon={<DeleteOutlined />}
+              onClick={() => onRemoveClick(selected)}
+            >
               선택 삭제
             </Button>
           </SpaceBetween.Box>

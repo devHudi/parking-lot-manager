@@ -3,6 +3,7 @@ import {
   CopyOutlined,
   PrinterOutlined,
   CheckOutlined,
+  MoneyCollectOutlined,
 } from "@ant-design/icons";
 
 import { PageTitle, PageTable } from "components";
@@ -75,7 +76,9 @@ const RoomAccs = () => {
         onAddClick={() => alert("추가")}
         onRemoveClick={(selected) => console.log(selected)}
       >
-        <Button type="danger"> 금월 부과 처리 </Button>
+        <Button type="danger" icon={<MoneyCollectOutlined />}>
+          금월 부과 처리
+        </Button>
         <Typography.Text type="danger">
           * 부과 처리는 매월 최소한 한번은 실행해야합니다.
         </Typography.Text>
