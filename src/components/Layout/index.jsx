@@ -1,62 +1,85 @@
-import { Layout, Menu, Breadcrumb } from "antd";
+import styled from "styled-components";
+import { useHistory, useLocation } from "react-router-dom";
+import { Layout, Menu } from "antd";
 import {
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
 } from "@ant-design/icons";
 
-const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
+const Logo = styled.div`
+  color: #ffffff;
+  font-size: 1.2rem;
+`;
+
+const getMenuKey = (pathname) => {
+  const routes = [
+    "/",
+    "/room-accs",
+    "/private-cars",
+    "/private-car-accs",
+    "/paid-tickets",
+  ];
+
+  return `${routes.indexOf(pathname) + 1}`;
+};
+
 const DefaultLayout = ({ children }) => {
+  const history = useHistory();
+  const location = useLocation();
+
   return (
-    <Layout>
+    <Layout style={{ height: "100vh" }}>
       <Header className="header">
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["2"]}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
+        <Logo>BUILDING_NAME 차량 관리자 페이지</Logo>
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
           <Menu
             mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
+            selectedKeys={[getMenuKey(location.pathname)]}
             style={{ height: "100%", borderRight: 0 }}
           >
-            <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-              <Menu.Item key="1">option1</Menu.Item>
-              <Menu.Item key="2">option2</Menu.Item>
-              <Menu.Item key="3">option3</Menu.Item>
-              <Menu.Item key="4">option4</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-              <Menu.Item key="5">option5</Menu.Item>
-              <Menu.Item key="6">option6</Menu.Item>
-              <Menu.Item key="7">option7</Menu.Item>
-              <Menu.Item key="8">option8</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub3"
-              icon={<NotificationOutlined />}
-              title="subnav 3"
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="1"
+              onClick={() => history.push("/")}
             >
-              <Menu.Item key="9">option9</Menu.Item>
-              <Menu.Item key="10">option10</Menu.Item>
-              <Menu.Item key="11">option11</Menu.Item>
-              <Menu.Item key="12">option12</Menu.Item>
-            </SubMenu>
+              호실 관리
+            </Menu.Item>
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="2"
+              onClick={() => history.push("/room-accs")}
+            >
+              호실 수납 관리
+            </Menu.Item>
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="3"
+              onClick={() => history.push("/private-cars")}
+            >
+              개인차량 관리
+            </Menu.Item>
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="4"
+              onClick={() => history.push("/private-car-accs")}
+            >
+              개인차량 수납 관리
+            </Menu.Item>
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="5"
+              onClick={() => history.push("/paid-tickets")}
+            >
+              주차권 판매 관리
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout style={{ padding: "0 24px 24px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
           <Content
             className="site-layout-background"
             style={{
