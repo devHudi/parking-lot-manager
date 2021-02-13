@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select, Modal } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 import { PageTitle, PageTable } from "components";
 
@@ -73,6 +74,21 @@ const data = [
 const Rooms = () => {
   const [searchMethod, setSearchMethod] = useState("room");
 
+  const showConfirm = () => {
+    Modal.confirm({
+      title: "무료 주차권 지급 경고",
+      icon: <ExclamationCircleOutlined />,
+      content:
+        "무료 주차권 지급은 현재 기준의 지분과 차량현황을 기준으로 지급됩니다. 반드시 모든 호실의 지분 및 차량 업무를 마친 다음 실행하시기 바랍니다. 본 작업은 모든 작업이 마무리된 월말에 실행하는 것을 권장드립니다.",
+      onOk() {
+        console.log("확인");
+      },
+      onCancel() {
+        console.log("취소");
+      },
+    });
+  };
+
   return (
     <>
       <PageTitle
@@ -86,7 +102,9 @@ const Rooms = () => {
         onAddClick={() => alert("추가")}
         onRemoveClick={(selected) => console.log(selected)}
       >
-        <Button type="primary"> 이번달 주차권 지급</Button>
+        <Button type="primary" onClick={showConfirm}>
+          금월 주차권 지급
+        </Button>
         <Select
           defaultValue="room"
           onChange={(value) => setSearchMethod(value)}
