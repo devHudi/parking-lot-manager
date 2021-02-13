@@ -7,6 +7,7 @@ const PageTable = ({
   name,
   columns,
   data,
+  noButtons,
   children,
   onAddClick,
   onRemoveClick,
@@ -16,17 +17,26 @@ const PageTable = ({
 
   return (
     <>
-      <SpaceBetween style={{ marginBottom: "10px" }}>
-        <SpaceBetween.Box>
-          <Button type="primary" onClick={onAddClick}>
-            {name} 추가
-          </Button>
-          <Button type="danger" onClick={() => onRemoveClick(selected)}>
-            선택 삭제
-          </Button>
-        </SpaceBetween.Box>
-        <SpaceBetween.Box>{children}</SpaceBetween.Box>
-      </SpaceBetween>
+      {!noButtons && (
+        <SpaceBetween style={{ marginBottom: "10px" }}>
+          <SpaceBetween.Box>
+            <Button type="primary" onClick={onAddClick}>
+              {name} 추가
+            </Button>
+            <Button type="danger" onClick={() => onRemoveClick(selected)}>
+              선택 삭제
+            </Button>
+          </SpaceBetween.Box>
+          <SpaceBetween.Box>{children}</SpaceBetween.Box>
+        </SpaceBetween>
+      )}
+
+      {noButtons && (
+        <SpaceBetween style={{ marginBottom: "10px" }}>
+          <SpaceBetween.Box>{children}</SpaceBetween.Box>
+        </SpaceBetween>
+      )}
+
       <Table
         rowSelection={{
           onChange: (selectedRowKeys, selectedRows) =>
