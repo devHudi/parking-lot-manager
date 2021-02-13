@@ -20,6 +20,7 @@
   "main": "./electron/index.js",
   "homepage": "./",
   "scripts": {
+    "electron-start": "wait-on http://localhost:3000 && electron ./electron",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
