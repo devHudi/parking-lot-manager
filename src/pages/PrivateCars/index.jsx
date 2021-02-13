@@ -22,6 +22,10 @@ const columns = [
     dataIndex: "contact",
   },
   {
+    title: "해당 차량",
+    dataIndex: "car_number",
+  },
+  {
     title: "차종",
     dataIndex: "car_type",
   },
@@ -42,6 +46,7 @@ const data = [
     company: "OO상사",
     owner: "김OO",
     contact: "01000000000",
+    car_number: "4523",
     car_type: "BMW OOO",
     monthly_amount: 110000,
     created_at: "2021-01-01",
