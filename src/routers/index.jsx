@@ -1,14 +1,18 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import { Layout } from "components";
 
-import {
-  Rooms,
-  RoomAccs,
-  PrivateCars,
-  PrivateCarAccs,
-  PaidTickets,
-} from "pages";
+import { PaidTickets } from "pages";
+
+import RoomsRouter from "./rooms";
+import RoomAccsRouter from "./roomAccs";
+import PrivateCarsRouter from "./privateCars";
+import PrivateCarAccsRouter from "./privateCarAccs";
 
 const DefaultRouter = () => {
   return (
@@ -16,16 +20,19 @@ const DefaultRouter = () => {
       <Switch>
         <Layout>
           <Route exact path="/">
-            <Rooms />
+            <Redirect to="/rooms" />
           </Route>
-          <Route exact path="/room-accs">
-            <RoomAccs />
+          <Route path="/rooms">
+            <RoomsRouter />
           </Route>
-          <Route exact path="/private-cars">
-            <PrivateCars />
+          <Route path="/room-accs">
+            <RoomAccsRouter />
           </Route>
-          <Route exact path="/private-car-accs">
-            <PrivateCarAccs />
+          <Route path="/private-cars">
+            <PrivateCarsRouter />
+          </Route>
+          <Route path="/private-car-accs">
+            <PrivateCarAccsRouter />
           </Route>
           <Route exact path="/paid-tickets">
             <PaidTickets />

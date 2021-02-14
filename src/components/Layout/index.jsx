@@ -16,14 +16,14 @@ const Logo = styled.div`
 
 const getMenuKey = (pathname) => {
   const routes = [
-    "/",
-    "/room-accs",
-    "/private-cars",
-    "/private-car-accs",
-    "/paid-tickets",
+    "rooms",
+    "room-accs",
+    "private-cars",
+    "private-car-accs",
+    "paid-tickets",
   ];
 
-  return `${routes.indexOf(pathname) + 1}`;
+  return `${routes.indexOf(pathname.split("/")[1]) + 1}`;
 };
 
 const DefaultLayout = ({ children }) => {
