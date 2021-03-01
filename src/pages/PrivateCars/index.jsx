@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { Button, Input, Select } from "antd";
-
 import { PageTitle, PageTable } from "components";
+
+import CreateModal from "./CreateModal";
 
 const columns = [
   {
@@ -54,8 +54,11 @@ const data = [
 ];
 
 const PrivateCars = () => {
+  const [modal, setModal] = useState(false);
+
   return (
     <>
+      <CreateModal visible={modal} onClose={() => setModal(false)} />
       <PageTitle
         title="개인 차량관리"
         subtitle="개인이 직접 등록한 차량을 관리할 수 있습니다."
@@ -64,7 +67,7 @@ const PrivateCars = () => {
         name="개인 차량"
         columns={columns}
         data={data}
-        onAddClick={() => alert("추가")}
+        onAddClick={() => setModal(true)}
         onRemoveClick={(selected) => console.log(selected)}
       />
     </>
