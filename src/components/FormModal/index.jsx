@@ -19,19 +19,19 @@ const TitleWrapper = ({ label, children }) => {
   );
 };
 
-const Text = ({ label, onChange }) => {
+const Text = ({ label, onChange, ...props }) => {
   const handleChange = (e) => {
     onChange(e.target.value);
   };
 
   return (
     <TitleWrapper label={label}>
-      <Input onChange={handleChange} />
+      <Input onChange={handleChange} {...props} />
     </TitleWrapper>
   );
 };
 
-const Number = ({ label, onChange }) => {
+const Number = ({ label, onChange, ...props }) => {
   return (
     <TitleWrapper label={label}>
       <InputNumber
@@ -39,18 +39,20 @@ const Number = ({ label, onChange }) => {
         defaultValue={1}
         style={{ width: "100%" }}
         onChange={onChange}
+        {...props}
       />
     </TitleWrapper>
   );
 };
 
-const Dropdown = ({ items, label, onChange }) => {
+const Dropdown = ({ items, label, onChange, ...props }) => {
   return (
     <TitleWrapper label={label}>
       <Select
         defaultValue={items[0].value}
         style={{ width: "100%" }}
         onChange={onChange}
+        {...props}
       >
         {items.map((item) => (
           <Select.Option value={item.value}>{item.label}</Select.Option>
@@ -60,7 +62,7 @@ const Dropdown = ({ items, label, onChange }) => {
   );
 };
 
-const DatePicker = ({ label, onChange }) => {
+const DatePicker = ({ label, onChange, ...props }) => {
   const dateFormat = "YYYY-MM-DD";
   return (
     <TitleWrapper label={label}>
@@ -68,17 +70,19 @@ const DatePicker = ({ label, onChange }) => {
         style={{ width: "100%" }}
         selected={moment().format(dateFormat)}
         onChange={onChange}
+        {...props}
       />
     </TitleWrapper>
   );
 };
 
-const CheckBox = ({ label, children, onChange }) => {
+const CheckBox = ({ label, children, onChange, ...props }) => {
   return (
     <TitleWrapper label={label}>
       <AntCheckbox
         style={{ width: "100%" }}
         onChange={(e) => onChange(e.target.checked)}
+        {...props}
       >
         {children}
       </AntCheckbox>
