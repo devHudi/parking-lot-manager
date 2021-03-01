@@ -24,19 +24,19 @@ const columns = [
   },
   {
     title: "해당 차량",
-    dataIndex: "car_number",
+    dataIndex: "carNumber",
   },
   {
     title: "차종",
-    dataIndex: "car_type",
+    dataIndex: "carType",
   },
   {
     title: "월정금액",
-    dataIndex: "monthly_amount",
+    dataIndex: "monthlyAmount",
   },
   {
     title: "등록일",
-    dataIndex: "created_at",
+    dataIndex: "createdAt",
   },
 ];
 
@@ -47,10 +47,10 @@ const data = [
     company: "OO상사",
     owner: "김OO",
     contact: "01000000000",
-    car_number: "4523",
-    car_type: "BMW OOO",
-    monthly_amount: 110000,
-    created_at: "2021-01-01",
+    carNumber: "4523",
+    carType: "BMW OOO",
+    monthlyAmount: 110000,
+    createdAt: "2021-01-01",
   },
 ];
 
@@ -71,7 +71,7 @@ const PrivateCars = () => {
         data={data}
         onAddClick={() => setModal(true)}
         onRemoveClick={(selected) => console.log(selected)}
-        onRowClick={(data) => history.push(`/private-cars/${data.id}`)}
+        onRowClick={(data) => history.push(`/private-cars/${data.key}`)}
       />
     </>
   );
