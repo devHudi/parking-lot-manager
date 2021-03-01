@@ -12,6 +12,7 @@ const PageTable = ({
   children,
   onAddClick,
   onRemoveClick,
+  onRowClick,
   dataHandler,
 }) => {
   const [selected, setSelected] = useState([]);
@@ -53,6 +54,13 @@ const PageTable = ({
         }}
         columns={columns}
         dataSource={dataHandler ? dataHandler(data) : data}
+        onRow={(record, rowIndex) => ({
+          onClick: onRowClick
+            ? () => onRowClick({ rowIndex, ...record })
+            : () => {
+                console.log({ rowIndex, ...record });
+              },
+        })}
       />
     </>
   );
