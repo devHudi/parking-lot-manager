@@ -1,4 +1,14 @@
-import { Modal, Input, InputNumber, Select, Typography, Space } from "antd";
+import {
+  Modal,
+  Input,
+  InputNumber,
+  Select,
+  DatePicker as AntDatePicker,
+  Checkbox as AntCheckbox,
+  Typography,
+  Space,
+} from "antd";
+import moment from "moment";
 
 const TitleWrapper = ({ label, children }) => {
   return (
@@ -50,6 +60,32 @@ const Dropdown = ({ items, label, onChange }) => {
   );
 };
 
+const DatePicker = ({ label, onChange }) => {
+  const dateFormat = "YYYY-MM-DD";
+  return (
+    <TitleWrapper label={label}>
+      <AntDatePicker
+        style={{ width: "100%" }}
+        selected={moment().format(dateFormat)}
+        onChange={onChange}
+      />
+    </TitleWrapper>
+  );
+};
+
+const CheckBox = ({ label, children, onChange }) => {
+  return (
+    <TitleWrapper label={label}>
+      <AntCheckbox
+        style={{ width: "100%" }}
+        onChange={(e) => onChange(e.target.checked)}
+      >
+        {children}
+      </AntCheckbox>
+    </TitleWrapper>
+  );
+};
+
 const FormModal = ({ title, visible, children, onOk, onCancel, onClose }) => {
   const handleOk = () => {
     onOk();
@@ -80,5 +116,7 @@ const FormModal = ({ title, visible, children, onOk, onCancel, onClose }) => {
 FormModal.Text = Text;
 FormModal.Number = Number;
 FormModal.Dropdown = Dropdown;
+FormModal.DatePicker = DatePicker;
+FormModal.CheckBox = CheckBox;
 
 export default FormModal;
