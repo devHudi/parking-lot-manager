@@ -39,7 +39,11 @@ const RoomDetails = () => {
           >
             수납 기록 확인
           </Button>
-          <Button type="primary" icon={<SaveOutlined />}>
+          <Button
+            type="primary"
+            onClick={() => history.push(`/rooms/${roomId}/free-tickets`)}
+            icon={<SaveOutlined />}
+          >
             무료 주차권 관리
           </Button>
         </SpaceBetween.Box>
