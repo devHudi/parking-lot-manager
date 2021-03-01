@@ -1,6 +1,6 @@
 import moment from "moment";
 
-import { PageTitle, PageTable } from "components";
+import { PageTitle, PageTable, Breadcrumb } from "components";
 import consts from "consts";
 
 const columns = [
@@ -41,8 +41,14 @@ const RoomAccDetails = () => {
 
   return (
     <>
+      <Breadcrumb
+        items={[
+          { link: "/room-accs", text: "호실 수납/부과 관리" },
+          { text: "수납기록 조회" },
+        ]}
+      />
       <PageTitle
-        title="호실 수납 기록"
+        title="수납기록 조회"
         subtitle="호실의 수납 기록을 확인하세요."
       />
       <PageTable name="개인 차량" columns={columns} data={data} noButtons />
