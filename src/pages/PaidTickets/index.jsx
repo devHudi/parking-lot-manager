@@ -2,6 +2,7 @@ import { DatePicker } from "antd";
 import moment from "moment";
 
 import { PageTitle, PageTable } from "components";
+import consts from "consts";
 
 const columns = [
   {
@@ -51,7 +52,6 @@ const data = [
   },
 ];
 
-const dateFormat = "YYYY-MM-DD";
 const PaidTickets = () => {
   return (
     <>
@@ -69,8 +69,8 @@ const PaidTickets = () => {
         <DatePicker.RangePicker
           placeholder={["시작 날짜", "마지막 날짜"]}
           defaultValue={[
-            moment(moment().subtract(1, "months"), dateFormat),
-            moment(new Date(), dateFormat),
+            moment(moment().subtract(1, "months"), consts.DATE_FORMAT),
+            moment(new Date(), consts.DATE_FORMAT),
           ]}
         />
       </PageTable>

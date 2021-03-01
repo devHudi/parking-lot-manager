@@ -8,6 +8,8 @@ import {
 } from "antd";
 import moment from "moment";
 
+import consts from "consts";
+
 const TitleWrapper = ({ label, children }) => {
   return (
     <div style={{ width: "100%" }}>
@@ -61,12 +63,11 @@ const Dropdown = ({ items, label, onChange, ...props }) => {
 };
 
 const DatePicker = ({ label, onChange, ...props }) => {
-  const dateFormat = "YYYY-MM-DD";
   return (
     <TitleWrapper label={label}>
       <AntDatePicker
         style={{ width: "100%" }}
-        selected={moment().format(dateFormat)}
+        selected={moment().format(consts.DATE_FORMAT)}
         onChange={onChange}
         {...props}
       />
