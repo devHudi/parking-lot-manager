@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { PageTitle, PageTable } from "components";
 
@@ -54,6 +55,7 @@ const data = [
 ];
 
 const PrivateCars = () => {
+  const history = useHistory();
   const [modal, setModal] = useState(false);
 
   return (
@@ -69,6 +71,7 @@ const PrivateCars = () => {
         data={data}
         onAddClick={() => setModal(true)}
         onRemoveClick={(selected) => console.log(selected)}
+        onRowClick={(data) => history.push(`/private-cars/${data.id}`)}
       />
     </>
   );

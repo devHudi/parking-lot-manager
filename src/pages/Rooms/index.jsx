@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { Button, Input, Select, Modal } from "antd";
 import { ExclamationCircleOutlined, BarcodeOutlined } from "@ant-design/icons";
@@ -77,6 +78,8 @@ const Rooms = () => {
   const [modal, setModal] = useState(false);
   const [searchMethod, setSearchMethod] = useState("room");
 
+  const history = useHistory();
+
   const showConfirm = () => {
     Modal.confirm({
       title: "무료 주차권 지급 경고",
@@ -105,7 +108,7 @@ const Rooms = () => {
         data={data}
         onAddClick={() => setModal(true)}
         onRemoveClick={(selected) => console.log(selected)}
-        onRowClick={(data) => console.log(data)}
+        onRowClick={(data) => history.push(`/rooms/${data.id}`)}
       >
         <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
           금월 주차권 지급
