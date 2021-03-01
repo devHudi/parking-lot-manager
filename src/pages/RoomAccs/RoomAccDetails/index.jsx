@@ -51,7 +51,7 @@ const RoomAccDetails = () => {
         title="수납기록 조회"
         subtitle="호실의 수납 기록을 확인하세요."
       />
-      <PageTable name="개인 차량" columns={columns} data={data} noButtons />
+      <PageTable name="수납기록 조회" columns={columns} data={data} noButtons />
     </>
   );
 };
