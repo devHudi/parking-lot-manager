@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { Button, Typography } from "antd";
 import {
   CopyOutlined,
@@ -43,25 +44,34 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    room: "302",
-    company: "OO상사",
-    monthly_amount: 110000,
-    acc_amount: 50000,
-    acc_type: "미수납 (부분수납)",
-    acc_view: <Button icon={<CopyOutlined />}> 수납기록 조회 </Button>,
-    print_bill: <Button icon={<PrinterOutlined />}> 고지서 출력 </Button>,
-    do_acc: (
-      <Button type="primary" icon={<CheckOutlined />}>
-        수납 처리
-      </Button>
-    ),
-  },
-];
-
 const RoomAccs = () => {
+  const history = useHistory();
+
+  const data = [
+    {
+      key: "1",
+      room: "302",
+      company: "OO상사",
+      monthly_amount: 110000,
+      acc_amount: 50000,
+      acc_type: "미수납 (부분수납)",
+      acc_view: (
+        <Button
+          onClick={() => history.push(`/room-accs/302`)}
+          icon={<CopyOutlined />}
+        >
+          수납기록 조회
+        </Button>
+      ),
+      print_bill: <Button icon={<PrinterOutlined />}> 고지서 출력 </Button>,
+      do_acc: (
+        <Button type="primary" icon={<CheckOutlined />}>
+          수납 처리
+        </Button>
+      ),
+    },
+  ];
+
   return (
     <>
       <PageTitle
