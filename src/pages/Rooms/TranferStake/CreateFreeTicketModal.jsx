@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormModal } from "components";
+import { FormModal, Fields } from "components";
 
 const TransferStakeModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -31,19 +31,19 @@ const TransferStakeModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.Number
+      <Fields.Number
         label="이전할 지분 양"
         onChange={(value) => {
           handleInput("amount", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="이전 대상 호실"
         onChange={(value) => {
           handleInput("room", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="비고"
         onChange={(value) => {
           handleInput("memo", value);

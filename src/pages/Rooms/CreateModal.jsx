@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormModal } from "components";
+import { FormModal, Fields } from "components";
 
 const CreateRoomModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -23,8 +23,6 @@ const CreateRoomModal = ({ visible, onClose }) => {
     onClose();
   };
 
-  console.log({ form });
-
   return (
     <FormModal
       title="호실 추가"
@@ -33,19 +31,19 @@ const CreateRoomModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.Text
+      <Fields.Text
         label="호실 명"
         onChange={(value) => {
           handleInput("room", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="입주사 명"
         onChange={(value) => {
           handleInput("company", value);
         }}
       />
-      <FormModal.Dropdown
+      <Fields.Dropdown
         label="공간 분류"
         items={[
           { label: "상가공간", value: "store" },
@@ -55,25 +53,25 @@ const CreateRoomModal = ({ visible, onClose }) => {
           handleInput("area_type", value);
         }}
       />
-      <FormModal.Number
+      <Fields.Number
         label="면적 (㎡)"
         onChange={(value) => {
           handleInput("area_m", value);
         }}
       />
-      <FormModal.DatePicker
+      <Fields.DatePicker
         label="면적 (㎡)"
         onChange={(value) => {
           handleInput("date", value);
         }}
       />
-      <FormModal.CheckBox
+      <Fields.CheckBox
         onChange={(value) => {
           handleInput("check", value);
         }}
       >
         껄껄껄
-      </FormModal.CheckBox>
+      </Fields.CheckBox>
     </FormModal>
   );
 };

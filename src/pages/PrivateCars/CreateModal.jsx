@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormModal } from "components";
+import { FormModal, Fields } from "components";
 
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -31,49 +31,49 @@ const CreateModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.Text
+      <Fields.Text
         label="호실 명"
         onChange={(value) => {
           handleInput("room", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="차주 성명"
         onChange={(value) => {
           handleInput("owner", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="차주 연락처"
         onChange={(value) => {
           handleInput("contact", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="차량번호"
         onChange={(value) => {
           handleInput("carId", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="차종"
         onChange={(value) => {
           handleInput("carType", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="은행"
         onChange={(value) => {
           handleInput("bank", value);
         }}
       />
-      <FormModal.DatePicker
+      <Fields.DatePicker
         label="등록일자"
         onChange={(value) => {
           handleInput("carId", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="비고"
         onChange={(value) => {
           handleInput("memo", value);

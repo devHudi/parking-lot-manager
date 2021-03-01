@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormModal } from "components";
+import { FormModal, Fields } from "components";
 
 const CreateFreeTicketModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -31,13 +31,13 @@ const CreateFreeTicketModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.Number
+      <Fields.Number
         label="발행할 주차권 장수"
         onChange={(value) => {
           handleInput("amount", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="비고"
         onChange={(value) => {
           handleInput("memo", value);

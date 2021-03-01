@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FormModal } from "components";
+import { FormModal, Fields } from "components";
 
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -31,37 +31,37 @@ const CreateModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.DatePicker
+      <Fields.DatePicker
         label="납부 날짜"
         onChange={(value) => {
           handleInput("date", value);
         }}
       />
-      <FormModal.Number
+      <Fields.Number
         label="납부 금액"
         onChange={(value) => {
           handleInput("amount", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="납부 은행"
         onChange={(value) => {
           handleInput("bank", value);
         }}
       />
-      <FormModal.Text
+      <Fields.Text
         label="비고"
         onChange={(value) => {
           handleInput("memo", value);
         }}
       />
-      <FormModal.CheckBox
+      <Fields.CheckBox
         onChange={(value) => {
           handleInput("fake", value);
         }}
       >
         이 수납은 가수납 입니다.
-      </FormModal.CheckBox>
+      </Fields.CheckBox>
     </FormModal>
   );
 };

@@ -10,7 +10,7 @@ import moment from "moment";
 
 const TitleWrapper = ({ label, children }) => {
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <Typography.Text> {label} </Typography.Text>
       {children}
     </div>
@@ -24,7 +24,7 @@ const Text = ({ label, onChange, ...props }) => {
 
   return (
     <TitleWrapper label={label}>
-      <Input onChange={handleChange} {...props} />
+      <Input onChange={handleChange} style={{ width: "100%" }} {...props} />
     </TitleWrapper>
   );
 };
