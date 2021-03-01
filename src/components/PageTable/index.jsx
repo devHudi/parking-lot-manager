@@ -48,6 +48,9 @@ const PageTable = ({
       )}
 
       <Table
+        style={{
+          minWidth: "1050px",
+        }}
         rowSelection={{
           onChange: (selectedRowKeys, selectedRows) =>
             setSelected(selectedRows),
