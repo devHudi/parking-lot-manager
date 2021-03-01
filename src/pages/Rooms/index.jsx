@@ -5,7 +5,7 @@ import { ExclamationCircleOutlined, BarcodeOutlined } from "@ant-design/icons";
 
 import { PageTitle, PageTable } from "components";
 
-import CreateRoomModal from "./CreateRoomModal";
+import CreateModal from "./CreateModal";
 
 const columns = [
   {
@@ -94,7 +94,7 @@ const Rooms = () => {
 
   return (
     <>
-      <CreateRoomModal visible={modal} onClose={() => setModal(false)} />
+      <CreateModal visible={modal} onClose={() => setModal(false)} />
       <PageTitle
         title="호실관리"
         subtitle="전체 호실을 조회하고 관리할 수 있습니다."
@@ -105,6 +105,7 @@ const Rooms = () => {
         data={data}
         onAddClick={() => setModal(true)}
         onRemoveClick={(selected) => console.log(selected)}
+        onRowClick={(data) => console.log(data)}
       >
         <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
           금월 주차권 지급

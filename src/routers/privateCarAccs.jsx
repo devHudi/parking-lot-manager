@@ -1,6 +1,6 @@
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 
-import { PrivateCarAccs } from "pages";
+import { PrivateCarAccs, PrivateCarAccDetails } from "pages";
 
 const PrivateCarAccsRouter = () => {
   const match = useRouteMatch();
@@ -9,6 +9,9 @@ const PrivateCarAccsRouter = () => {
     <Switch>
       <Route exact path={`${match.url}`}>
         <PrivateCarAccs />
+      </Route>
+      <Route exact path={`${match.url}/:accId`}>
+        <PrivateCarAccDetails />
       </Route>
     </Switch>
   );

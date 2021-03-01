@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormModal } from "components";
 
-const CreateRoomModal = ({ visible, onClose }) => {
+const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
 
   const handleInput = (name, value) => {
@@ -25,42 +25,45 @@ const CreateRoomModal = ({ visible, onClose }) => {
 
   return (
     <FormModal
-      title="호실 추가"
+      title="수납 처리"
       visible={visible}
       onOk={handleOk}
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <FormModal.Text
-        label="호실 명"
+      <FormModal.DatePicker
+        label="납부 날짜"
         onChange={(value) => {
-          handleInput("room", value);
-        }}
-      />
-      <FormModal.Text
-        label="입주사 명"
-        onChange={(value) => {
-          handleInput("company", value);
-        }}
-      />
-      <FormModal.Dropdown
-        label="공간 분류"
-        items={[
-          { label: "상가공간", value: "store" },
-          { label: "업무공간", value: "work" },
-        ]}
-        onChange={(value) => {
-          handleInput("area_type", value);
+          handleInput("date", value);
         }}
       />
       <FormModal.Number
-        label="면적 (㎡)"
+        label="납부 금액"
         onChange={(value) => {
-          handleInput("area_m", value);
+          handleInput("amount", value);
         }}
       />
+      <FormModal.Text
+        label="납부 은행"
+        onChange={(value) => {
+          handleInput("bank", value);
+        }}
+      />
+      <FormModal.Text
+        label="비고"
+        onChange={(value) => {
+          handleInput("memo", value);
+        }}
+      />
+      <FormModal.CheckBox
+        onChange={(value) => {
+          handleInput("fake", value);
+        }}
+      >
+        이 수납은 가수납 입니다.
+      </FormModal.CheckBox>
     </FormModal>
   );
 };
 
-export default CreateRoomModal;
+export default CreateModal;

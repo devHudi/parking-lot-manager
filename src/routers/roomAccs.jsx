@@ -1,6 +1,6 @@
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 
-import { RoomAccs } from "pages";
+import { RoomAccs, RoomAccDetails, BillPrint } from "pages";
 
 const RoomAccsRouter = () => {
   const match = useRouteMatch();
@@ -9,6 +9,12 @@ const RoomAccsRouter = () => {
     <Switch>
       <Route exact path={`${match.url}`}>
         <RoomAccs />
+      </Route>
+      <Route exact path={`${match.url}/:roomId`}>
+        <RoomAccDetails />
+      </Route>
+      <Route exact path={`${match.url}/:roomId/print/:accId`}>
+        <BillPrint />
       </Route>
     </Switch>
   );
