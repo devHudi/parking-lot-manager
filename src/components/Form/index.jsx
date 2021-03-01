@@ -1,10 +1,12 @@
-import { Space } from "antd";
+import { Space, Card } from "antd";
 
 const Form = ({ children }) => {
   return (
-    <Space direction="vertical" style={{ width: "100%" }}>
-      {children}
-    </Space>
+    <Card style={{ width: "100%" }}>
+      <Space direction="vertical" style={{ width: "100%" }}>
+        {children}
+      </Space>
+    </Card>
   );
 };
 
