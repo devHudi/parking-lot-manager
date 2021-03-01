@@ -79,7 +79,7 @@ const DefaultLayout = ({ children }) => {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Layout style={{ padding: "0 24px 24px" }}>
+        <Layout style={{ padding: "0 24px 24px", overflow: "auto" }}>
           <Content
             className="site-layout-background"
             style={{
