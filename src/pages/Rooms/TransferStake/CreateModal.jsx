@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
-const TransferStakeModal = ({ visible, onClose }) => {
+const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
 
   const handleInput = (name, value) => {
@@ -53,4 +53,4 @@ const TransferStakeModal = ({ visible, onClose }) => {
   );
 };
 
-export default TransferStakeModal;
+export default CreateModal;
