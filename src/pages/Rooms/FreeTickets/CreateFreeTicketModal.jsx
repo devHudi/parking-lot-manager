@@ -12,14 +12,10 @@ const CreateFreeTicketModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
-    console.log(form);
-    alert("OK");
     onClose();
   };
 
   const handleCancel = () => {
-    console.log(form);
-    alert("Cancel");
     onClose();
   };
 
