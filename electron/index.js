@@ -2,6 +2,8 @@ const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 const path = require("path");
 
+const events = require("./events");
+
 let mainWindow;
 
 function createWindow() {
@@ -24,6 +26,8 @@ function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = undefined;
   });
+
+  events.init();
 }
 
 app.on("ready", createWindow);
