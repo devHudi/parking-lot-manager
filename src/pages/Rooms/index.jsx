@@ -90,7 +90,6 @@ const Rooms = () => {
   };
 
   const data = rooms.findAll();
-  console.log(data);
 
   return (
     <>

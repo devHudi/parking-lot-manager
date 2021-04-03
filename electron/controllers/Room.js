@@ -70,7 +70,9 @@ exports.find = async (id) => {
     where: { id },
   });
 
-  return obj.dataValues;
+  const totalStake = await getTotalStake(id);
+
+  return { ...obj.dataValues, totalStake };
 
   /*
     TODO: 다른테이블에서 데이터를 가져와

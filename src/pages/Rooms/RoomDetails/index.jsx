@@ -29,13 +29,13 @@ const RoomDetails = () => {
 
   useEffect(() => {
     if (room) {
-      const { company, type, areaM, defaultStake } = room;
+      const { company, type, areaM, defaultStake, totalStake } = room;
       setForm({
         company,
         type,
         areaM,
         areaP: m2p(areaM),
-        defaultStake,
+        stake: `${totalStake} (${defaultStake} + ${totalStake - defaultStake})`,
         freeTickets: 0,
       });
     }
@@ -174,7 +174,7 @@ const RoomDetails = () => {
             value={form.areaP}
             onChange={handleAreaP}
           />
-          <Fields.Number disabled label="지분" value={form.defaultStake} />
+          <Fields.Text disabled label="지분" value={form.stake} />
           <Fields.Number
             disabled
             label="잔여 무료 주차권"
