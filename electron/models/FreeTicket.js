@@ -8,20 +8,20 @@ const FreeTicket = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
     roomId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
     type: {
       // "GET" or "USE"
       type: DataTypes.STRING,
-      allowNull: true,
-    },
-    date: {
-      type: DataTypes.DATE,
       allowNull: true,
     },
     memo: {

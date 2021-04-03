@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
-const UseFreeTicketModal = ({ visible, onClose }) => {
+import { freeTickets } from "apis";
+
+const UseFreeTicketModal = ({ visible, roomId, onClose }) => {
   const [form, setForm] = useState({});
 
   const handleInput = (name, value) => {
@@ -12,6 +14,8 @@ const UseFreeTicketModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
+    const { amount, memo } = form;
+    freeTickets.create(roomId, -amount, "USE", memo);
     onClose();
   };
 

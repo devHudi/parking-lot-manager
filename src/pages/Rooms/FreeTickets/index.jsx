@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Button } from "antd";
 import { PageTitle, PageTable, Breadcrumb } from "components";
 
+import { freeTickets } from "apis";
 import consts from "consts";
 
 import CreateFreeTicketModal from "./CreateFreeTicketModal";
@@ -14,6 +15,7 @@ const columns = [
   {
     title: "수령/사용",
     dataIndex: "type",
+    render: (value) => (value === "GET" ? "수령" : "사용"),
   },
   {
     title: "수량",
@@ -26,28 +28,29 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    type: "수령",
-    amount: 3,
-    createdAt: new Date(),
-  },
-];
-
 const FreeTickets = () => {
   const { roomId } = useParams();
 
   const [createModal, setCreateModal] = useState(false);
   const [useModal, setUseModal] = useState(false);
 
+  const handleRemove = (selected) => {
+    const idList = selected.map((row) => row.id);
+    freeTickets.remove(idList);
+  };
+
+  const data = freeTickets.findAllByRoomId(roomId);
+
   return (
     <>
       <CreateFreeTicketModal
         visible={createModal}
+        roomId={roomId}
         onClose={() => setCreateModal(false)}
       />
       <UseFreeTicketModal
         visible={useModal}
+        roomId={roomId}
         onClose={() => setUseModal(false)}
       />
       <Breadcrumb
@@ -66,7 +69,7 @@ const FreeTickets = () => {
         columns={columns}
         data={data}
         onAddClick={() => setCreateModal(true)}
-        onRemoveClick={(selected) => console.log(selected)}
+        onRemoveClick={handleRemove}
       >
         <Button onClick={() => setUseModal(true)}>주차권 사용 처리</Button>
       </PageTable>

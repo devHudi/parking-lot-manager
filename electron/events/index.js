@@ -5,6 +5,7 @@ const stakeTransfer = require("./stakeTransfer");
 const car = require("./car");
 const privateCar = require("./privateCar");
 const paidTicket = require("./paidTicket");
+const freeTicket = require("./freeTicket");
 
 const init = () => {
   db.connect();
@@ -14,6 +15,7 @@ const init = () => {
   car();
   privateCar();
   paidTicket();
+  freeTicket();
 };
 
 module.exports = { init };
