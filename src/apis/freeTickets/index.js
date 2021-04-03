@@ -1,5 +1,10 @@
 const { ipcRenderer } = window.require("electron");
 
+const monthlyGiving = () => {
+  const data = ipcRenderer.sendSync("free-tickets-monthly-giving");
+  return data;
+};
+
 const create = (roomId, amount, type, memo) => {
   const data = ipcRenderer.sendSync("free-tickets-create", {
     roomId,
@@ -25,6 +30,7 @@ const remove = (idList) => {
 };
 
 const freeTickets = {
+  monthlyGiving,
   create,
   findAllByRoomId,
   remove,

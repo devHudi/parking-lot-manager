@@ -2,6 +2,10 @@ const { ipcMain } = require("electron");
 const Controllers = require("../controllers");
 
 const init = () => {
+  ipcMain.on("free-tickets-monthly-giving", async (event, args) => {
+    event.returnValue = await Controllers.FreeTicket.monthlyGiving();
+  });
+
   ipcMain.on("free-tickets-find-all-by-room", async (event, args) => {
     const { roomId } = args;
     event.returnValue = await Controllers.FreeTicket.findAllByRoomId(roomId);
