@@ -224,7 +224,11 @@ const RoomDetails = () => {
           <Table
             columns={[
               { title: "차량 번호", dataIndex: "carNumber" },
-              { title: "무료/유료", dataIndex: "isFree" },
+              {
+                title: "무료/유료",
+                dataIndex: "isFree",
+                render: (value) => (value ? "예" : "아니오"),
+              },
             ]}
             dataSource={carsData}
             pagination={{ position: ["none", "none"] }}

@@ -28,18 +28,22 @@ const columns = [
     dataIndex: "areaP",
   },
   {
-    title: "지분",
-    dataIndex: "stake",
+    title: "기본지분",
+    dataIndex: "defaultStake",
+  },
+  {
+    title: "현재지분",
+    dataIndex: "totalStake",
   },
   {
     title: "무료 차량",
     dataIndex: "freeCars",
-    render: (arr) => arr.join(", "),
+    render: (arr) => arr.map((car) => car.carNumber).join(", "),
   },
   {
     title: "유료 차량",
     dataIndex: "paidCars",
-    render: (arr) => arr.join(", "),
+    render: (arr) => arr.map((car) => car.carNumber).join(", "),
   },
   {
     title: "초과 대수",
@@ -85,11 +89,8 @@ const Rooms = () => {
     rooms.remove(idList);
   };
 
-  const data = rooms.findAll().map((row) => ({
-    ...row,
-    freeCars: [],
-    paidCars: [],
-  }));
+  const data = rooms.findAll();
+  console.log(data);
 
   return (
     <>

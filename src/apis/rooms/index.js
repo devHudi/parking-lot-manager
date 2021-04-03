@@ -40,12 +40,20 @@ const remove = (idList) => {
   return data;
 };
 
+const getTotalStake = (id) => {
+  const data = ipcRenderer.sendSync("room-get-total-stake", {
+    id,
+  });
+  return data;
+};
+
 const rooms = {
   create,
   findAll,
   find,
   update,
   remove,
+  getTotalStake,
 };
 
 export default rooms;

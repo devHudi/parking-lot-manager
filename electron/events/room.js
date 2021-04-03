@@ -31,6 +31,11 @@ const init = () => {
     const { idList } = args;
     event.returnValue = await Controllers.Room.remove(idList);
   });
+
+  ipcMain.on("room-get-total-stake", async (event, args) => {
+    const { id } = args;
+    event.returnValue = await Controllers.Room.getTotalStake(id);
+  });
 };
 
 module.exports = init;
