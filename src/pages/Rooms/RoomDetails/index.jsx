@@ -29,14 +29,21 @@ const RoomDetails = () => {
 
   useEffect(() => {
     if (room) {
-      const { company, type, areaM, defaultStake, totalStake } = room;
+      const {
+        company,
+        type,
+        areaM,
+        defaultStake,
+        totalStake,
+        freeTickets,
+      } = room;
       setForm({
         company,
         type,
         areaM,
         areaP: m2p(areaM),
         stake: `${totalStake} (${defaultStake} + ${totalStake - defaultStake})`,
-        freeTickets: 0,
+        freeTickets,
       });
     }
   }, [room]);

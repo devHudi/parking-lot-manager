@@ -2,6 +2,7 @@ const Room = require("../models/Room");
 
 const StakeTransferController = require("../controllers/StakeTransfer");
 const CarController = require("../controllers/Car");
+const FreeTicketController = require("../controllers/FreeTicket");
 
 const calc = require("../utils/calc");
 
@@ -46,6 +47,9 @@ exports.findAll = async () => {
     const cars = await CarController.findAllByRoomId(row.dataValues.id);
     const totalAmount = cars.length;
     const excessAmount = totalAmount - totalStake;
+    const freeTickets = (
+      await FreeTicketController.findAllByRoomId(row.id)
+    ).reduce((acc, cur) => acc + cur.amount, 0);
 
     return {
       ...row.dataValues,
@@ -55,12 +59,9 @@ exports.findAll = async () => {
       paidCars: cars.filter((car) => !car.isFree),
       totalAmount,
       excessAmount: excessAmount <= 0 ? 0 : excessAmount,
+      freeTickets,
     };
   });
-
-  /*
-    TODO: 무료주차권도 반환 해야함
-  */
 
   return await Promise.all(room);
 };
@@ -71,15 +72,12 @@ exports.find = async (id) => {
   });
 
   const totalStake = await getTotalStake(id);
+  const freeTickets = (await FreeTicketController.findAllByRoomId(id)).reduce(
+    (acc, cur) => acc + cur.amount,
+    0
+  );
 
-  return { ...obj.dataValues, totalStake };
-
-  /*
-    TODO: 다른테이블에서 데이터를 가져와
-          면적(평), 최종 지분, 무료차량 리스트, 유료차량 리스트,
-          차량 초과대수, 총 차량 대수, 무료주차권
-          위의 필드를 함께 반환해야함.
-  */
+  return { ...obj.dataValues, totalStake, freeTickets };
 };
 
 exports.remove = async (idList) => {
