@@ -6,8 +6,8 @@ const StakeTransfer = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
     sendRoomId: {
       type: DataTypes.STRING,

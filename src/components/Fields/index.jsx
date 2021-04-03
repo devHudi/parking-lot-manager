@@ -68,7 +68,7 @@ const DatePicker = ({ label, onChange, ...props }) => {
       <AntDatePicker
         style={{ width: "100%" }}
         selected={moment().format(consts.DATE_FORMAT)}
-        onChange={onChange}
+        onChange={(e) => onChange(e.toDate())}
         {...props}
       />
     </TitleWrapper>

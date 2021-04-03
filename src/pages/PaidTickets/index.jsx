@@ -1,17 +1,22 @@
+import { useState } from "react";
 import { DatePicker } from "antd";
 import moment from "moment";
 
 import { PageTitle, PageTable } from "components";
 import consts from "consts";
 
+import { paidTickets } from "apis";
+
+import CreateModal from "./CreateModal";
+
 const columns = [
   {
     title: "차량번호",
-    dataIndex: "car_number",
+    dataIndex: "carNumber",
   },
   {
     title: "차종",
-    dataIndex: "car_type",
+    dataIndex: "carType",
   },
   {
     title: "차주",
@@ -22,16 +27,22 @@ const columns = [
     dataIndex: "contact",
   },
   {
-    title: "주차 날짜",
-    dataIndex: "date",
+    title: "주차 예정일",
+    dataIndex: "parknigDate",
+    render: (value) => moment(value).format(consts.DATE_FORMAT),
   },
   {
     title: "시간",
-    dataIndex: "term",
+    dataIndex: "period",
   },
   {
     title: "결제 방법",
-    dataIndex: "pay_method",
+    dataIndex: "payMethod",
+  },
+  {
+    title: "판매 일자",
+    dataIndex: "soldDate",
+    render: (value) => moment(value).format(consts.DATE_FORMAT),
   },
   {
     title: "비고",
@@ -39,22 +50,19 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    car_number: "1234",
-    car_type: "OOO",
-    owner: "김OO",
-    contact: "01000000000",
-    date: "0000-00-00",
-    term: "30분",
-    pay_method: "현금",
-    memo: "",
-  },
-];
-
 const PaidTickets = () => {
+  const [modal, setModal] = useState(false);
+
+  const data = paidTickets.findAll();
+
+  const handleRemove = (selected) => {
+    const idList = selected.map((row) => row.id);
+    paidTickets.remove(idList);
+  };
+
   return (
     <>
+      <CreateModal visible={modal} onClose={() => setModal(false)} />
       <PageTitle
         title="주차권 판매 관리"
         subtitle="외부 공사차량 등에 판매하는 주차권을 관리할 수 있습니다."
@@ -63,8 +71,8 @@ const PaidTickets = () => {
         name="주차권"
         columns={columns}
         data={data}
-        onAddClick={() => alert("추가")}
-        onRemoveClick={(selected) => console.log(selected)}
+        onAddClick={() => setModal(true)}
+        onRemoveClick={handleRemove}
       >
         <DatePicker.RangePicker
           placeholder={["시작 날짜", "마지막 날짜"]}

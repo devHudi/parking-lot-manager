@@ -6,8 +6,8 @@ const Car = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
     roomId: {
       type: DataTypes.STRING,

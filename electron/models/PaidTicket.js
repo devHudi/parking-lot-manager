@@ -8,8 +8,8 @@ const PaidTicket = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
     carNumber: {
       type: DataTypes.STRING,
@@ -31,8 +31,16 @@ const PaidTicket = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    type: {
+    period: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    soldDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    parkingDate: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
     memo: {

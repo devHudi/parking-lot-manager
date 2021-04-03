@@ -1,8 +1,16 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { FormModal, Fields } from "components";
 
+import { stakeTransfers } from "apis";
+
 const CreateModal = ({ visible, onClose }) => {
-  const [form, setForm] = useState({});
+  const { roomId } = useParams();
+  const [form, setForm] = useState({
+    room: "",
+    amount: 1,
+    memo: "",
+  });
 
   const handleInput = (name, value) => {
     setForm({
@@ -12,13 +20,12 @@ const CreateModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
-    console.log(form);
-    alert("OK");
+    const { room: receiveRoomId, amount, memo } = form;
+    stakeTransfers.create(roomId, receiveRoomId, amount, memo);
     onClose();
   };
 
   const handleCancel = () => {
-    console.log(form);
     alert("Cancel");
     onClose();
   };

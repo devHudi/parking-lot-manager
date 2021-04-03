@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
+import { rooms } from "apis";
+
 const CreateRoomModal = ({ visible, onClose }) => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    room: "",
+    company: "",
+    type: "work",
+    areaM: 0,
+    memo: "",
+  });
 
   const handleInput = (name, value) => {
     setForm({
@@ -12,14 +20,12 @@ const CreateRoomModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
-    console.log(form);
-    alert("OK");
+    const { room, company, type, areaM, memo } = form;
+    rooms.create(room, company, type, areaM, memo);
     onClose();
   };
 
   const handleCancel = () => {
-    console.log(form);
-    alert("Cancel");
     onClose();
   };
 
@@ -32,46 +38,44 @@ const CreateRoomModal = ({ visible, onClose }) => {
       onClose={onClose}
     >
       <Fields.Text
+        value={form.room}
         label="호실 명"
         onChange={(value) => {
           handleInput("room", value);
         }}
       />
       <Fields.Text
+        value={form.company}
         label="입주사 명"
         onChange={(value) => {
           handleInput("company", value);
         }}
       />
       <Fields.Dropdown
+        value={form.type}
         label="공간 분류"
         items={[
           { label: "상가공간", value: "store" },
           { label: "업무공간", value: "work" },
         ]}
         onChange={(value) => {
-          handleInput("area_type", value);
+          handleInput("type", value);
         }}
       />
       <Fields.Number
+        value={form.areaM}
         label="면적 (㎡)"
         onChange={(value) => {
-          handleInput("area_m", value);
+          handleInput("areaM", value);
         }}
       />
-      <Fields.DatePicker
-        label="면적 (㎡)"
+      <Fields.Text
+        value={form.memo}
+        label="비고"
         onChange={(value) => {
-          handleInput("date", value);
+          handleInput("memo", value);
         }}
       />
-      <Fields.CheckBox
-        onChange={(value) => {
-          handleInput("check", value);
-        }}
-      >
-        껄껄껄
-      </Fields.CheckBox>
     </FormModal>
   );
 };

@@ -81,7 +81,7 @@ const RoomAccs = () => {
       <PageTable
         name="개인 차량"
         columns={columns}
-        data={data}
+        data={[]}
         noButtons
         onAddClick={() => alert("추가")}
         onRemoveClick={(selected) => console.log(selected)}

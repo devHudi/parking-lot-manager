@@ -1,41 +1,50 @@
 const PaidTicket = require("../models/PaidTicket");
 
 const create = async (
-  id,
   carNumber,
   carType,
   owner,
   contact,
   payMethod,
-  type,
+  period,
+  soldDate,
+  parkingDate,
   memo
 ) => {
-  if (type !== "30M" && type !== "1H" && type !== "1D") {
-    throw new Error("Paid ticket type error");
+  if (period !== "30M" && period !== "1H" && period !== "1D") {
+    throw new Error("Paid ticket period error");
   }
 
   return await PaidTicket.create({
-    id,
     carNumber,
     carType,
     owner,
     contact,
     payMethod,
-    type,
+    period,
+    soldDate,
+    parkingDate,
     memo,
   });
 };
 
-const findAll = async (startDate, endDate) => {
-  const obj = await PaidTicket.findAll({
-    where: {
-      from: {
-        $between: [startDate, endDate],
-      },
-    },
-  });
+const findAll = async () => {
+  const obj = await PaidTicket.findAll();
+  return obj.map((row) => row.dataValues);
+};
 
-  return obj.dataValues;
+const findAllByDate = async (startDate, endDate) => {
+  const obj = (
+    await PaidTicket.findAll({
+      where: {
+        from: {
+          $between: [startDate, endDate],
+        },
+      },
+    })
+  ).map((row) => row.dataValues);
+
+  return obj;
 };
 
 const remove = async (idList) => {
@@ -46,4 +55,4 @@ const remove = async (idList) => {
   });
 };
 
-module.exports = { create, findAll, remove };
+module.exports = { create, findAll, findAllByDate, remove };

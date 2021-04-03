@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { PageTitle, PageTable, Breadcrumb } from "components";
 
+import { stakeTransfers } from "apis";
 import consts from "consts";
 
 import CreateModal from "./CreateModal";
@@ -32,20 +33,20 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    sendRoomId: "3423",
-    arrow: "→",
-    receiveRoomId: "4233",
-    amount: 3,
-    createdAt: new Date(),
-  },
-];
-
 const TransferStake = () => {
   const { roomId } = useParams();
 
+  const data = stakeTransfers.findAllByRoomId(roomId).map((data) => ({
+    ...data,
+    arrow: "→",
+  }));
+
   const [modal, setModal] = useState(false);
+
+  const handleRemove = (selected) => {
+    const idList = selected.map((row) => row.id);
+    stakeTransfers.remove(idList);
+  };
 
   return (
     <>
@@ -66,7 +67,7 @@ const TransferStake = () => {
         columns={columns}
         data={data}
         onAddClick={() => setModal(true)}
-        onRemoveClick={(selected) => console.log(selected)}
+        onRemoveClick={handleRemove}
       />
     </>
   );

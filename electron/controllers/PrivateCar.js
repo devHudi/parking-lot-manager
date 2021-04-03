@@ -1,25 +1,31 @@
 const PrivateCar = require("../models/PrivateCar");
 
-const create = async (id, roomId, carNumber, carType, owner, contact, memo) => {
+const create = async (
+  roomId,
+  carNumber,
+  carType,
+  owner,
+  contact,
+  memo,
+  carRegisterAt
+) => {
   return await PrivateCar.create({
-    id,
     roomId,
     carNumber,
     carType,
     owner,
     contact,
     memo,
+    carRegisterAt,
   });
 };
 
-const findAllByRoomId = async (roomId) => {
-  const obj = await PrivateCar.findAll({
-    where: {
-      roomId,
-    },
-  });
+const findAll = async () => {
+  const obj = await PrivateCar.findAll();
 
-  return obj.dataValues;
+  return obj.map((row) => row.dataValues);
+
+  /* TODO: roomId 통해서 입주사명(company) 도 가져와야함 */
 };
 
 const find = async (id) => {
@@ -38,12 +44,30 @@ const remove = async (idList) => {
   });
 };
 
-const update = async (id, options) => {
-  return await PrivateCar.update(options, {
-    where: {
-      id,
+const update = async (
+  id,
+  roomId,
+  owner,
+  contact,
+  carNumber,
+  carType,
+  carRegisterAt
+) => {
+  return await PrivateCar.update(
+    {
+      roomId,
+      owner,
+      contact,
+      carNumber,
+      carType,
+      carRegisterAt,
     },
-  });
+    {
+      where: {
+        id,
+      },
+    }
+  );
 };
 
-module.exports = { create, findAllByRoomId, find, remove, update };
+module.exports = { create, findAll, find, remove, update };

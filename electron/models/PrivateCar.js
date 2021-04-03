@@ -6,8 +6,8 @@ const PrivateCar = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
     roomId: {
       type: DataTypes.STRING,
@@ -27,6 +27,10 @@ const PrivateCar = sequelize.define(
     },
     contact: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    carRegisterAt: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
     memo: {

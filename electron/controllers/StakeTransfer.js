@@ -1,8 +1,8 @@
 const StakeTransfer = require("../models/StakeTransfer");
+const Op = require("Sequelize").Op;
 
-const create = async (id, sendRoomId, receiveRoomId, amount, memo) => {
+const create = async (sendRoomId, receiveRoomId, amount, memo) => {
   return await StakeTransfer.create({
-    id,
     sendRoomId,
     receiveRoomId,
     amount,
@@ -13,7 +13,7 @@ const create = async (id, sendRoomId, receiveRoomId, amount, memo) => {
 const findAllByRoomId = async (roomId) => {
   const obj = await StakeTransfer.findAll({
     where: {
-      $or: [
+      [Op.or]: [
         {
           sendRoomId: roomId,
         },
@@ -23,8 +23,7 @@ const findAllByRoomId = async (roomId) => {
       ],
     },
   });
-
-  return obj.dataValues;
+  return obj.map((row) => row.dataValues);
 };
 
 const find = async (id) => {

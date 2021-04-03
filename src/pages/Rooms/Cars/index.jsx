@@ -2,6 +2,8 @@ import { useState } from "react";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
+import { cars } from "apis";
+
 import { PageTitle, PageTable, Breadcrumb } from "components";
 
 import consts from "consts";
@@ -36,21 +38,17 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    carNumber: "2342 바",
-    carType: "벤츠",
-    owner: "조동현",
-    contact: "0303030303",
-    memo: "메모",
-    createdAt: new Date(),
-  },
-];
-
 const Cars = () => {
   const { roomId } = useParams();
 
   const [modal, setModal] = useState(false);
+
+  const handleRemove = (selected) => {
+    const idList = selected.map((row) => row.id);
+    cars.remove(idList);
+  };
+
+  const data = cars.findAllByRoom(roomId);
 
   return (
     <>
@@ -75,7 +73,7 @@ const Cars = () => {
         columns={columns}
         data={data}
         onAddClick={() => setModal(true)}
-        onRemoveClick={(selected) => console.log(selected)}
+        onRemoveClick={handleRemove}
       />
     </>
   );

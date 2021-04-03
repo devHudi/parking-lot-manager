@@ -6,6 +6,8 @@ import { ExclamationCircleOutlined, BarcodeOutlined } from "@ant-design/icons";
 
 import { PageTitle, PageTable } from "components";
 
+import { rooms } from "apis";
+
 import CreateModal from "./CreateModal";
 
 const columns = [
@@ -19,11 +21,11 @@ const columns = [
   },
   {
     title: "면적 (㎡)",
-    dataIndex: "area_m",
+    dataIndex: "areaM",
   },
   {
     title: "면적 (평)",
-    dataIndex: "area_p",
+    dataIndex: "areaP",
   },
   {
     title: "지분",
@@ -31,46 +33,29 @@ const columns = [
   },
   {
     title: "무료 차량",
-    dataIndex: "free_cars",
+    dataIndex: "freeCars",
     render: (arr) => arr.join(", "),
   },
   {
     title: "유료 차량",
-    dataIndex: "paid_cars",
+    dataIndex: "paidCars",
     render: (arr) => arr.join(", "),
   },
   {
     title: "초과 대수",
-    dataIndex: "excess_amount",
+    dataIndex: "excessAmount",
   },
   {
     title: "총 대수",
-    dataIndex: "total_amount",
+    dataIndex: "totalAmount",
   },
   {
     title: "무료 주차권",
-    dataIndex: "free_tickets",
+    dataIndex: "freeTickets",
   },
   {
     title: "비고",
     dataIndex: "memo",
-  },
-];
-
-const data = [
-  {
-    key: "1",
-    id: "301",
-    company: "OO상사",
-    area_m: 44.84,
-    area_p: 13.56,
-    stake: 0.3,
-    free_cars: ["3432", "4323", "2342"],
-    paid_cars: ["8134", "8135"],
-    excess_amount: 2,
-    total_amount: 5,
-    free_tickets: 55,
-    memo: "테스트 호실",
   },
 ];
 
@@ -95,6 +80,17 @@ const Rooms = () => {
     });
   };
 
+  const handleRemove = (selected) => {
+    const idList = selected.map((row) => row.id);
+    rooms.remove(idList);
+  };
+
+  const data = rooms.findAll().map((row) => ({
+    ...row,
+    freeCars: [],
+    paidCars: [],
+  }));
+
   return (
     <>
       <CreateModal visible={modal} onClose={() => setModal(false)} />
@@ -107,7 +103,7 @@ const Rooms = () => {
         columns={columns}
         data={data}
         onAddClick={() => setModal(true)}
-        onRemoveClick={(selected) => console.log(selected)}
+        onRemoveClick={handleRemove}
         onRowClick={(data) => history.push(`/rooms/${data.id}`)}
       >
         <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
@@ -117,14 +113,15 @@ const Rooms = () => {
           defaultValue="room"
           onChange={(value) => setSearchMethod(value)}
         >
-          <Select.Option value="room">호실로 검색</Select.Option>
-          <Select.Option value="company">입주사로 검색</Select.Option>
+          <Select.Option value="room">호실</Select.Option>
+          <Select.Option value="company">입주사</Select.Option>
         </Select>
         <Input.Search
           placeholder="검색어"
           allowClear
           enterButton
           onSearch={(value) => console.log({ searchMethod, value })}
+          /* TODO: 검색 가능하도록 해야함 */
         />
       </PageTable>
     </>

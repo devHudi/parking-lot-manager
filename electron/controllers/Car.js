@@ -1,8 +1,7 @@
 const Car = require("../models/Car");
 
-const create = async (id, roomId, carNumber, carType, owner, contact, memo) => {
+const create = async (roomId, carNumber, carType, owner, contact, memo) => {
   return await Car.create({
-    id,
     roomId,
     carNumber,
     carType,
@@ -19,7 +18,7 @@ const findAllByRoomId = async (roomId) => {
     },
   });
 
-  return obj.dataValues;
+  return obj.map((row) => row.dataValues);
 };
 
 const find = async (id) => {

@@ -9,6 +9,7 @@ const PageTable = ({
   columns,
   data,
   noButtons,
+  noSelection,
   children,
   onAddClick,
   onRemoveClick,
@@ -17,25 +18,33 @@ const PageTable = ({
 }) => {
   const [selected, setSelected] = useState([]);
 
+  const keyData = data
+    ? data.map((row) => ({ ...row, key: JSON.stringify(row) }))
+    : [];
+
   return (
     <>
       {!noButtons && (
         <SpaceBetween style={{ marginBottom: "10px" }}>
           <SpaceBetween.Box>
-            <Button
-              type="primary"
-              icon={<FileAddOutlined />}
-              onClick={onAddClick}
-            >
-              {name} 추가
-            </Button>
-            <Button
-              type="danger"
-              icon={<DeleteOutlined />}
-              onClick={() => onRemoveClick(selected)}
-            >
-              선택 삭제
-            </Button>
+            {onAddClick && (
+              <Button
+                type="primary"
+                icon={<FileAddOutlined />}
+                onClick={onAddClick}
+              >
+                {name} 추가
+              </Button>
+            )}
+            {onRemoveClick && (
+              <Button
+                type="danger"
+                icon={<DeleteOutlined />}
+                onClick={() => onRemoveClick(selected)}
+              >
+                선택 삭제
+              </Button>
+            )}
           </SpaceBetween.Box>
           <SpaceBetween.Box>{children}</SpaceBetween.Box>
         </SpaceBetween>
@@ -51,12 +60,14 @@ const PageTable = ({
         style={{
           minWidth: "1050px",
         }}
-        rowSelection={{
-          onChange: (selectedRowKeys, selectedRows) =>
-            setSelected(selectedRows),
-        }}
+        rowSelection={
+          !noSelection && {
+            onChange: (selectedRowKeys, selectedRows) =>
+              setSelected(selectedRows),
+          }
+        }
         columns={columns}
-        dataSource={dataHandler ? dataHandler(data) : data}
+        dataSource={dataHandler ? dataHandler(keyData) : keyData}
         onRow={(record, rowIndex) => ({
           onClick: onRowClick
             ? () => onRowClick({ rowIndex, ...record })

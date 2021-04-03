@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
+import { cars } from "apis";
+
 const CreateModal = ({ visible, roomId, onClose }) => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState({
+    carNumber: "",
+    carType: "",
+    owner: "",
+    contact: "",
+    memo: "",
+  });
 
   const handleInput = (name, value) => {
     setForm({
@@ -12,6 +20,8 @@ const CreateModal = ({ visible, roomId, onClose }) => {
   };
 
   const handleOk = () => {
+    const { carNumber, carType, owner, contact, memo } = form;
+    cars.create(roomId, carNumber, carType, owner, contact, memo);
     onClose();
   };
 

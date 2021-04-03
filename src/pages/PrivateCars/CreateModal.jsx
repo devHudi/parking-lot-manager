@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
+import { privateCars } from "apis";
+
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
 
@@ -12,8 +14,24 @@ const CreateModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
-    console.log(form);
-    alert("OK");
+    const {
+      roomId,
+      carNumber,
+      carType,
+      owner,
+      contact,
+      memo,
+      carRegisterAt,
+    } = form;
+    privateCars.create(
+      roomId,
+      carNumber,
+      carType,
+      owner,
+      contact,
+      memo,
+      carRegisterAt
+    );
     onClose();
   };
 
@@ -34,7 +52,7 @@ const CreateModal = ({ visible, onClose }) => {
       <Fields.Text
         label="호실 명"
         onChange={(value) => {
-          handleInput("room", value);
+          handleInput("roomId", value);
         }}
       />
       <Fields.Text
@@ -52,7 +70,7 @@ const CreateModal = ({ visible, onClose }) => {
       <Fields.Text
         label="차량번호"
         onChange={(value) => {
-          handleInput("carId", value);
+          handleInput("carNumber", value);
         }}
       />
       <Fields.Text
@@ -61,16 +79,10 @@ const CreateModal = ({ visible, onClose }) => {
           handleInput("carType", value);
         }}
       />
-      <Fields.Text
-        label="은행"
-        onChange={(value) => {
-          handleInput("bank", value);
-        }}
-      />
       <Fields.DatePicker
         label="등록일자"
         onChange={(value) => {
-          handleInput("carId", value);
+          handleInput("carRegisterAt", value);
         }}
       />
       <Fields.Text
