@@ -48,7 +48,7 @@ const Cars = () => {
     cars.remove(idList);
   };
 
-  const data = cars.findAllByRoom(roomId);
+  const data = cars.findAllByRoomId(roomId);
 
   return (
     <>

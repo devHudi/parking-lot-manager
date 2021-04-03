@@ -102,6 +102,8 @@ const RoomDetails = () => {
       amount: stake.amount,
     }));
 
+  const carsData = cars.findAllByRoomId(roomId);
+
   return (
     <>
       <Breadcrumb
@@ -221,10 +223,10 @@ const RoomDetails = () => {
           <Typography.Title level={4}>차량 현황</Typography.Title>
           <Table
             columns={[
-              { title: "차량 번호", dataIndex: "carId" },
-              { title: "무료/유료", dataIndex: "free" },
+              { title: "차량 번호", dataIndex: "carNumber" },
+              { title: "무료/유료", dataIndex: "isFree" },
             ]}
-            dataSource={stakeReceivings}
+            dataSource={carsData}
             pagination={{ position: ["none", "none"] }}
           />
         </Form>

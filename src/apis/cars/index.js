@@ -12,7 +12,7 @@ const create = (roomId, carNumber, carType, owner, contact, memo) => {
   return data;
 };
 
-const findAllByRoom = (roomId) => {
+const findAllByRoomId = (roomId) => {
   const data = ipcRenderer.sendSync("car-find-all-by-room", { roomId });
   return data;
 };
@@ -26,7 +26,7 @@ const remove = (idList) => {
 
 const cars = {
   create,
-  findAllByRoom,
+  findAllByRoomId,
   remove,
 };
 
