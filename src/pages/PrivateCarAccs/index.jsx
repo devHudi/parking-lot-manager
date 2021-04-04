@@ -13,6 +13,8 @@ import _ from "lodash";
 
 import { privateCarAccs, privateCarPurchases } from "apis";
 
+import { useForceUpdate } from "hooks";
+
 import { PageTitle, PageTable } from "components";
 import PurchaseModal from "./PurchaseModal";
 
@@ -21,6 +23,8 @@ const PrivateCarAccs = () => {
 
   const [privateCarId, setPrivateCarId] = useState();
   const [modal, setModal] = useState(false);
+
+  const forceUpdate = useForceUpdate();
 
   const columns = [
     {
@@ -96,7 +100,8 @@ const PrivateCarAccs = () => {
   ];
 
   const handleCreate = () => {
-    console.log(privateCarAccs.create());
+    privateCarAccs.create();
+    forceUpdate();
   };
 
   const purchaseData = _.chain(
@@ -166,7 +171,10 @@ const PrivateCarAccs = () => {
         </Typography.Text>
       </PageTable>
     </>
+    // TODO: 호실, 입주사, 차량번호, 차종, 차주, 연락처 보여줘야함
   );
 };
+
+// TODO: 검색기능 및 년,월 별 필터링 만들어야함
 
 export default PrivateCarAccs;

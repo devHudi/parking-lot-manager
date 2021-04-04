@@ -85,6 +85,7 @@ const RoomDetails = () => {
   const handleSave = () => {
     const { company, type, areaM } = form;
     rooms.update(roomId, company, type, areaM);
+    alert("저장되었습니다.");
   };
 
   const handleRemove = () => {

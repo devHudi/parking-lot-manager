@@ -8,6 +8,8 @@ import { PageTitle, PageTable } from "components";
 
 import { rooms, freeTickets } from "apis";
 
+import { useForceUpdate } from "hooks";
+
 import CreateModal from "./CreateModal";
 
 const columns = [
@@ -67,6 +69,8 @@ const Rooms = () => {
   const [modal, setModal] = useState(false);
   const [searchMethod, setSearchMethod] = useState("room");
 
+  const forceUpdate = useForceUpdate();
+
   const history = useHistory();
 
   const showConfirm = () => {
@@ -76,8 +80,8 @@ const Rooms = () => {
       content:
         "무료 주차권 지급은 현재 기준의 지분과 차량현황을 기준으로 지급됩니다. 반드시 모든 호실의 지분 및 차량 업무를 마친 다음 실행하시기 바랍니다. 본 작업은 모든 작업이 마무리된 월말에 실행하는 것을 권장드립니다.",
       onOk() {
-        const rsp = freeTickets.monthlyGiving();
-        console.log(rsp);
+        freeTickets.monthlyGiving();
+        forceUpdate();
       },
       onCancel() {
         console.log("취소");
@@ -88,6 +92,7 @@ const Rooms = () => {
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     rooms.remove(idList);
+    forceUpdate();
   };
 
   const data = rooms.findAll();

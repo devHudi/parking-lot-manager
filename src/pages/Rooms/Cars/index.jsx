@@ -8,6 +8,8 @@ import { PageTitle, PageTable, Breadcrumb } from "components";
 
 import consts from "consts";
 
+import { useForceUpdate } from "hooks";
+
 import CreateModal from "./CreateModal";
 
 const columns = [
@@ -48,9 +50,12 @@ const Cars = () => {
 
   const [modal, setModal] = useState(false);
 
+  const forceUpdate = useForceUpdate();
+
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     cars.remove(idList);
+    forceUpdate();
   };
 
   const data = cars.findAllByRoomId(roomId);

@@ -12,6 +12,8 @@ import _ from "lodash";
 
 import { roomAccs, roomPurchases } from "apis";
 
+import { useForceUpdate } from "hooks";
+
 import { PageTitle, PageTable } from "components";
 import PurchaseModal from "./PurchaseModal";
 
@@ -20,6 +22,8 @@ const RoomAccs = () => {
 
   const [roomId, setRoomId] = useState();
   const [modal, setModal] = useState(false);
+
+  const forceUpdate = useForceUpdate();
 
   const columns = [
     {
@@ -80,6 +84,7 @@ const RoomAccs = () => {
 
   const handleCreate = () => {
     roomAccs.create();
+    forceUpdate();
   };
 
   const purchaseData = _.chain(
@@ -146,5 +151,6 @@ const RoomAccs = () => {
     // TODO: 입주사 보여줘야함
   );
 };
+// TODO: 검색기능 및 년,월 별 필터링 만들어야함
 
 export default RoomAccs;

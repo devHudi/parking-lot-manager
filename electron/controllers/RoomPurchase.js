@@ -22,6 +22,7 @@ exports.findAllByRoomId = async (roomId) => {
     },
   });
   return obj.map((row) => row.dataValues);
+  // TODO: purchaseDate 로 내림차순 필요
 };
 
 exports.findAllByDate = async (year, month) => {
@@ -36,4 +37,5 @@ exports.findAllByDate = async (year, month) => {
     },
   });
   return obj.map((row) => row.dataValues);
+  // TODO: purchaseDate 로 내림차순 필요
 };

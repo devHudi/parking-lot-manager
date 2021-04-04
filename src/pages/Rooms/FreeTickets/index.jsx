@@ -8,6 +8,8 @@ import { PageTitle, PageTable, Breadcrumb } from "components";
 import { freeTickets } from "apis";
 import consts from "consts";
 
+import { useForceUpdate } from "hooks";
+
 import CreateFreeTicketModal from "./CreateFreeTicketModal";
 import UseFreeTicketModal from "./UseFreeTicketModal";
 
@@ -34,9 +36,12 @@ const FreeTickets = () => {
   const [createModal, setCreateModal] = useState(false);
   const [useModal, setUseModal] = useState(false);
 
+  const forceUpdate = useForceUpdate();
+
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     freeTickets.remove(idList);
+    forceUpdate();
   };
 
   const data = freeTickets.findAllByRoomId(roomId);

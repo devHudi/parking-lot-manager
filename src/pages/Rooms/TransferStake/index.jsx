@@ -7,6 +7,8 @@ import { PageTitle, PageTable, Breadcrumb } from "components";
 import { stakeTransfers } from "apis";
 import consts from "consts";
 
+import { useForceUpdate } from "hooks";
+
 import CreateModal from "./CreateModal";
 
 const columns = [
@@ -43,9 +45,12 @@ const TransferStake = () => {
 
   const [modal, setModal] = useState(false);
 
+  const forceUpdate = useForceUpdate();
+
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     stakeTransfers.remove(idList);
+    forceUpdate();
   };
 
   return (

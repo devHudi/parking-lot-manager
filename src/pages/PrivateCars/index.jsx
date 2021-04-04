@@ -8,6 +8,8 @@ import { Input, Select } from "antd";
 
 import consts from "consts";
 
+import { useForceUpdate } from "hooks";
+
 import { PageTitle, PageTable } from "components";
 
 import CreateModal from "./CreateModal";
@@ -53,15 +55,17 @@ const PrivateCars = () => {
   const [modal, setModal] = useState(false);
   const [searchMethod, setSearchMethod] = useState("room");
 
+  const forceUpdate = useForceUpdate();
+
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     privateCars.remove(idList);
+    forceUpdate();
   };
 
   const data = privateCars
     .findAll()
     .map((row) => ({ ...row, monthlyAmount: 110000 }));
-  console.log(data);
 
   return (
     <>

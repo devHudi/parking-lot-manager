@@ -5,6 +5,8 @@ import moment from "moment";
 import { PageTitle, PageTable } from "components";
 import consts from "consts";
 
+import { useForceUpdate } from "hooks";
+
 import { paidTickets } from "apis";
 
 import CreateModal from "./CreateModal";
@@ -53,11 +55,15 @@ const columns = [
 const PaidTickets = () => {
   const [modal, setModal] = useState(false);
 
+  const forceUpdate = useForceUpdate();
+
   const data = paidTickets.findAll();
+  // TODO: 날짜 필터링 및 검색 기능 추가해야함
 
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
     paidTickets.remove(idList);
+    forceUpdate();
   };
 
   return (
