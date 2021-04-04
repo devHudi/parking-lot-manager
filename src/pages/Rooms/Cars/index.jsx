@@ -53,10 +53,7 @@ const Cars = () => {
     cars.remove(idList);
   };
 
-  console.log({ roomId });
   const data = cars.findAllByRoomId(roomId);
-
-  console.log(data);
 
   return (
     <>

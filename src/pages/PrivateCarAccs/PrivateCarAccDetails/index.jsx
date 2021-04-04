@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
 import moment from "moment";
 
-import { PageTitle, PageTable, Breadcrumb } from "components";
+import { privateCarPurchases } from "apis";
+
 import consts from "consts";
+import { PageTitle, PageTable, Breadcrumb } from "components";
 
 const columns = [
   {
@@ -19,7 +22,7 @@ const columns = [
   },
   {
     title: "날짜",
-    dataIndex: "date",
+    dataIndex: "purchaseDate",
     render: (value) => moment(value).format(consts.DATE_FORMAT),
   },
   {
@@ -29,21 +32,16 @@ const columns = [
 ];
 
 const PrivateCarAccDetails = () => {
-  const data = [
-    {
-      amount: 3000,
-      bank: "우리은행",
-      fake: false,
-      date: new Date(),
-      memo: "메모입니다",
-    },
-  ];
+  const { privateCarId } = useParams();
+
+  const data = privateCarPurchases.findAllByPrivateCarId(privateCarId);
+  // console.log({ privateCarId });
 
   return (
     <>
       <Breadcrumb
         items={[
-          { link: "/private-car-accs", text: "개인차량 수납/부과 관리" },
+          { link: "/private-car-accs", text: "개인 차량 수납/부과 관리" },
           { text: "개인차량 수납기록 조회" },
         ]}
       />
@@ -56,6 +54,7 @@ const PrivateCarAccDetails = () => {
         columns={columns}
         data={data}
         noButtons
+        noSelection
       />
     </>
   );

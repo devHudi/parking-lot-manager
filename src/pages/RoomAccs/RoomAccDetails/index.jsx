@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
 import moment from "moment";
 
-import { PageTitle, PageTable, Breadcrumb } from "components";
+import { roomPurchases } from "apis";
+
 import consts from "consts";
+import { PageTitle, PageTable, Breadcrumb } from "components";
 
 const columns = [
   {
@@ -19,7 +22,7 @@ const columns = [
   },
   {
     title: "날짜",
-    dataIndex: "date",
+    dataIndex: "purchaseDate",
     render: (value) => moment(value).format(consts.DATE_FORMAT),
   },
   {
@@ -29,15 +32,9 @@ const columns = [
 ];
 
 const RoomAccDetails = () => {
-  const data = [
-    {
-      amount: 3000,
-      bank: "우리은행",
-      fake: false,
-      date: new Date(),
-      memo: "메모입니다",
-    },
-  ];
+  const { roomId } = useParams();
+
+  const data = roomPurchases.findAllByRoomId(roomId);
 
   return (
     <>
@@ -51,7 +48,13 @@ const RoomAccDetails = () => {
         title="수납기록 조회"
         subtitle="호실의 수납 기록을 확인하세요."
       />
-      <PageTable name="수납기록 조회" columns={columns} data={data} noButtons />
+      <PageTable
+        name="수납기록 조회"
+        columns={columns}
+        data={data}
+        noButtons
+        noSelection
+      />
     </>
   );
 };

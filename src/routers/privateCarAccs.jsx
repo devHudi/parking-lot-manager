@@ -10,7 +10,7 @@ const PrivateCarAccsRouter = () => {
       <Route exact path={`${match.url}`}>
         <PrivateCarAccs />
       </Route>
-      <Route exact path={`${match.url}/:accId`}>
+      <Route exact path={`${match.url}/:privateCarId`}>
         <PrivateCarAccDetails />
       </Route>
     </Switch>

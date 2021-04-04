@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
-const CreateModal = ({ visible, onClose }) => {
-  const [form, setForm] = useState({});
+import { privateCarPurchases } from "apis";
+
+const PurchaseModal = ({ visible, privateCarId, onClose }) => {
+  const [form, setForm] = useState({
+    bank: "",
+    amount: 0,
+    fake: false,
+    purchaseDate: new Date(),
+    memo: "",
+  });
 
   const handleInput = (name, value) => {
     setForm({
@@ -12,14 +20,19 @@ const CreateModal = ({ visible, onClose }) => {
   };
 
   const handleOk = () => {
-    console.log(form);
-    alert("OK");
+    const { bank, amount, fake, purchaseDate, memo } = form;
+    privateCarPurchases.create(
+      privateCarId,
+      bank,
+      amount,
+      fake,
+      purchaseDate,
+      memo
+    );
     onClose();
   };
 
   const handleCancel = () => {
-    console.log(form);
-    alert("Cancel");
     onClose();
   };
 
@@ -31,12 +44,6 @@ const CreateModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <Fields.DatePicker
-        label="납부 날짜"
-        onChange={(value) => {
-          handleInput("date", value);
-        }}
-      />
       <Fields.Number
         label="납부 금액"
         onChange={(value) => {
@@ -47,6 +54,12 @@ const CreateModal = ({ visible, onClose }) => {
         label="납부 은행"
         onChange={(value) => {
           handleInput("bank", value);
+        }}
+      />
+      <Fields.DatePicker
+        label="납부 날짜"
+        onChange={(value) => {
+          handleInput("purchaseDate", value);
         }}
       />
       <Fields.Text
@@ -66,4 +79,4 @@ const CreateModal = ({ visible, onClose }) => {
   );
 };
 
-export default CreateModal;
+export default PurchaseModal;

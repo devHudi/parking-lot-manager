@@ -6,6 +6,12 @@ const car = require("./car");
 const privateCar = require("./privateCar");
 const paidTicket = require("./paidTicket");
 const freeTicket = require("./freeTicket");
+const roomAcc = require("./roomAcc");
+const roomPurchase = require("./roomPurchase");
+const privateCarAcc = require("./privateCarAcc");
+const privateCarPurchase = require("./privateCarPurchase");
+
+console.log({ privateCarAcc });
 
 const init = () => {
   db.connect();
@@ -16,6 +22,10 @@ const init = () => {
   privateCar();
   paidTicket();
   freeTicket();
+  roomAcc();
+  roomPurchase();
+  privateCarAcc();
+  privateCarPurchase();
 };
 
 module.exports = { init };

@@ -8,10 +8,10 @@ const PrivateCarPurchase = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
-    roomId: {
+    privateCarId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -25,6 +25,10 @@ const PrivateCarPurchase = sequelize.define(
     },
     fake: {
       type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    purchaseDate: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
     memo: {

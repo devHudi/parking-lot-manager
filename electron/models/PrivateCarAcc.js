@@ -8,10 +8,10 @@ const PrivateCarAcc = sequelize.define(
   {
     id: {
       primaryKey: true,
-      type: DataTypes.STRING,
-      allowNull: false,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
     },
-    roomId: {
+    privateCarId: {
       type: DataTypes.STRING,
       allowNull: false,
     },
