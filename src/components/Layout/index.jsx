@@ -33,7 +33,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Header className="header">
-        <Logo>BUILDING_NAME 차량 관리자 페이지</Logo>
+        <Logo>차량 관리자 페이지</Logo>
       </Header>
       <Layout>
         <Sider width={200} className="site-layout-background">
