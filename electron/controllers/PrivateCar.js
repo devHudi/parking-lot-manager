@@ -1,8 +1,10 @@
 const PrivateCar = require("../models/PrivateCar");
+const PrivateCarPurchase = require("../models/PrivateCarPurchase");
+const PrivateCarAcc = require("../models/PrivateCarAcc");
 
-const Room = require("../controllers/Room");
-const PrivateCarAcc = require("../controllers/PrivateCarAcc");
-const PrivateCarPurchase = require("../controllers/PrivateCarPurchase");
+const RoomController = require("../controllers/Room");
+const PrivateCarAccController = require("../controllers/PrivateCarAcc");
+const PrivateCarPurchaseController = require("../controllers/PrivateCarPurchase");
 
 exports.create = async (
   roomId,
@@ -27,7 +29,7 @@ exports.create = async (
 exports.findAll = async () => {
   const cars = (await PrivateCar.findAll()).map(async (row) => {
     const car = row.dataValues;
-    const room = await Room.find(car.roomId);
+    const room = await RoomController.find(car.roomId);
 
     return { ...car, company: room.company };
   });
@@ -44,13 +46,23 @@ exports.find = async (id) => {
 };
 
 exports.remove = async (idList) => {
+  await PrivateCarAcc.destroy({
+    where: {
+      privateCarId: idList,
+    },
+  });
+
+  await PrivateCarPurchase.destroy({
+    where: {
+      privateCarId: idList,
+    },
+  });
+
   return await PrivateCar.destroy({
     where: {
       id: idList,
     },
   });
-
-  // TODO: 관련된 다른 테이블 (부과현황, 수납현황)도 지워야함
 };
 
 exports.update = async (
@@ -80,16 +92,16 @@ exports.update = async (
 };
 
 exports.getAccTable = async (year, month) => {
-  const accs = (await PrivateCarAcc.findAllByDate(year, month)).map(
+  const accs = (await PrivateCarAccController.findAllByDate(year, month)).map(
     async (acc) => {
       const car = (
         await PrivateCar.findOne({ where: { id: acc.privateCarId } })
       ).dataValues;
 
-      const room = await Room.find(car.roomId);
+      const room = await RoomController.find(car.roomId);
 
       const purchaseAmount = (
-        await PrivateCarPurchase.findAllByPrivateCarIdAndDate(
+        await PrivateCarPurchaseController.findAllByPrivateCarIdAndDate(
           car.id,
           year,
           month
