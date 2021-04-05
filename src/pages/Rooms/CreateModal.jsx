@@ -21,8 +21,14 @@ const CreateRoomModal = ({ visible, onClose }) => {
 
   const handleOk = () => {
     const { room, company, type, areaM, memo } = form;
-    rooms.create(room, company, type, areaM, memo);
-    onClose();
+
+    const isExists = rooms.isExists(room);
+    if (isExists) {
+      alert("이미 존재하는 호실입니다.");
+    } else {
+      rooms.create(room, company, type, areaM, memo);
+      onClose();
+    }
   };
 
   const handleCancel = () => {
