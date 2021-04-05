@@ -48,9 +48,12 @@ const TransferStake = () => {
   const forceUpdate = useForceUpdate();
 
   const handleRemove = (selected) => {
-    const idList = selected.map((row) => row.id);
-    stakeTransfers.remove(idList);
-    forceUpdate();
+    if (window.confirm("선택한 항목을 정말로 삭제할까요?")) {
+      const idList = selected.map((row) => row.id);
+      stakeTransfers.remove(idList);
+      alert("삭제되었습니다.");
+      forceUpdate();
+    }
   };
 
   return (
