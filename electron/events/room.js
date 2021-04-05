@@ -41,6 +41,11 @@ const init = () => {
     const { year, month } = args;
     event.returnValue = await Controllers.Room.getAccTable(year, month);
   });
+
+  ipcMain.on("room-is-exists", async (event, args) => {
+    const { id } = args;
+    event.returnValue = await Controllers.Room.isExists(id);
+  });
 };
 
 module.exports = init;

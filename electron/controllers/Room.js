@@ -211,3 +211,16 @@ exports.getAccTable = async (year, month) => {
   );
   return await Promise.all(accs);
 };
+
+exports.isExists = async (id) => {
+  const rooms = (
+    await Room.findAll({
+      where: {
+        id,
+      },
+    })
+  ).map((row) => row.dataValues);
+
+  if (rooms.length > 0) return true;
+  return false;
+};

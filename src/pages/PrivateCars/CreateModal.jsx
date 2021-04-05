@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormModal, Fields } from "components";
 
-import { privateCars } from "apis";
+import { privateCars, rooms } from "apis";
 
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
@@ -23,15 +23,22 @@ const CreateModal = ({ visible, onClose }) => {
       memo,
       carRegisterAt,
     } = form;
-    privateCars.create(
-      roomId,
-      carNumber,
-      carType,
-      owner,
-      contact,
-      memo,
-      carRegisterAt
-    );
+
+    const isExists = rooms.isExists(roomId);
+    if (isExists) {
+      privateCars.create(
+        roomId,
+        carNumber,
+        carType,
+        owner,
+        contact,
+        memo,
+        carRegisterAt
+      );
+    } else {
+      alert("해당 호실이 존재하지 않습니다. 호실 입력을 다시 확인해주세요.");
+    }
+
     onClose();
   };
 

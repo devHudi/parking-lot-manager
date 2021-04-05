@@ -55,6 +55,13 @@ const getAccTable = (year, month) => {
   return data;
 };
 
+const isExists = (id) => {
+  const data = ipcRenderer.sendSync("room-is-exists", {
+    id,
+  });
+  return data;
+};
+
 const rooms = {
   create,
   findAll,
@@ -63,6 +70,7 @@ const rooms = {
   remove,
   getTotalStake,
   getAccTable,
+  isExists,
 };
 
 export default rooms;
