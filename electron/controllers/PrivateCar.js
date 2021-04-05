@@ -1,12 +1,11 @@
 const PrivateCar = require("../models/PrivateCar");
 
+const Room = require("../controllers/Room");
 const PrivateCarAcc = require("../controllers/PrivateCarAcc");
 const PrivateCarPurchase = require("../controllers/PrivateCarPurchase");
 
-const Room = require("../controllers/Room");
-
 exports.create = async (
-  privateCarId,
+  roomId,
   carNumber,
   carType,
   owner,
@@ -15,7 +14,7 @@ exports.create = async (
   carRegisterAt
 ) => {
   return await PrivateCar.create({
-    privateCarId,
+    roomId,
     carNumber,
     carType,
     owner,
@@ -26,11 +25,14 @@ exports.create = async (
 };
 
 exports.findAll = async () => {
-  const obj = await PrivateCar.findAll();
+  const cars = (await PrivateCar.findAll()).map(async (row) => {
+    const car = row.dataValues;
+    const room = await Room.find(car.roomId);
 
-  return obj.map((row) => row.dataValues);
+    return { ...car, company: room.company };
+  });
 
-  /* TODO: roomId 통해서 입주사명(company) 도 가져와야함 */
+  return await Promise.all(cars);
 };
 
 exports.find = async (id) => {
@@ -47,6 +49,8 @@ exports.remove = async (idList) => {
       id: idList,
     },
   });
+
+  // TODO: 관련된 다른 테이블 (부과현황, 수납현황)도 지워야함
 };
 
 exports.update = async (
