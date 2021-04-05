@@ -138,7 +138,6 @@ const PrivateCarAccs = () => {
         </Typography.Text>
       </PageTable>
     </>
-    // TODO: 호실, 입주사, 차량번호, 차종, 차주, 연락처 보여줘야함
   );
 };
 

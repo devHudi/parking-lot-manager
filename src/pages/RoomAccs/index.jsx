@@ -122,7 +122,6 @@ const RoomAccs = () => {
         </Typography.Text>
       </PageTable>
     </>
-    // TODO: 입주사 보여줘야함
   );
 };
 // TODO: 검색기능 및 년,월 별 필터링 만들어야함

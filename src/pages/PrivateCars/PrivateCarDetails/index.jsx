@@ -97,11 +97,12 @@ const PrivateCarDetails = () => {
       <SpaceBetween style={{ marginBottom: "10px" }}>
         <SpaceBetween.Box>
           <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-            호실 정보 저장
+            개인 차량 정보 저장
           </Button>
           <Button type="danger" icon={<DeleteOutlined />}>
-            호실 삭제
+            개인 차량 삭제
           </Button>
+          {/* TODO: 개인차량 삭제 기능 개발 */}
         </SpaceBetween.Box>
         <SpaceBetween.Box>
           <Button

@@ -89,7 +89,7 @@ exports.remove = async (idList) => {
     },
   });
 
-  // TODO: 관련된 다른 테이블도 지워야함
+  // TODO: 관련된 다른 테이블 (소속 차량, 개인 차량, 지분 이전 현황, 무료 주차권 현황, 부과현황, 수납현황)도 지워야함
 };
 
 exports.update = async (id, company, type, areaM) => {
