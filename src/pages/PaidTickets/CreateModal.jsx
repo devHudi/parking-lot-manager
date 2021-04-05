@@ -53,8 +53,6 @@ const CreateModal = ({ visible, onClose }) => {
   };
 
   const handleCancel = () => {
-    console.log(form);
-    alert("Cancel");
     onClose();
   };
 

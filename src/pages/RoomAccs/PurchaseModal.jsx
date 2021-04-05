@@ -34,8 +34,6 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
   };
 
   const handleCancel = () => {
-    console.log(form);
-    alert("Cancel");
     onClose();
   };
 

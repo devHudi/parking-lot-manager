@@ -109,7 +109,6 @@ const RoomAccs = () => {
         data={data}
         noButtons
         noSelection
-        onAddClick={() => alert("추가")}
       >
         <Button
           type="danger"

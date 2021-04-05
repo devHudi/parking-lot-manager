@@ -26,7 +26,6 @@ const CreateModal = ({ visible, onClose }) => {
   };
 
   const handleCancel = () => {
-    alert("Cancel");
     onClose();
   };
 
