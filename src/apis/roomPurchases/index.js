@@ -14,14 +14,14 @@ const create = (roomId, bank, amount, fake, purchaseDate, memo) => {
 };
 
 const findAllByRoomId = (roomId) => {
-  const data = ipcRenderer.sendSync("room-acc-find-all-by-room-id", {
+  const data = ipcRenderer.sendSync("room-purchase-find-all-by-room-id", {
     roomId,
   });
   return data;
 };
 
 const findAllByDate = (year, month) => {
-  const data = ipcRenderer.sendSync("room-acc-find-all-by-date", {
+  const data = ipcRenderer.sendSync("room-purchase-find-all-by-date", {
     year,
     month,
   });

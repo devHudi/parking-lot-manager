@@ -47,6 +47,14 @@ const getTotalStake = (id) => {
   return data;
 };
 
+const getAccTable = (year, month) => {
+  const data = ipcRenderer.sendSync("room-get-acc-table", {
+    year,
+    month,
+  });
+  return data;
+};
+
 const rooms = {
   create,
   findAll,
@@ -54,6 +62,7 @@ const rooms = {
   update,
   remove,
   getTotalStake,
+  getAccTable,
 };
 
 export default rooms;

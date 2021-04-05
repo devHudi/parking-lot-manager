@@ -3,6 +3,8 @@ const Room = require("../models/Room");
 const StakeTransferController = require("../controllers/StakeTransfer");
 const CarController = require("../controllers/Car");
 const FreeTicketController = require("../controllers/FreeTicket");
+const RoomAcc = require("../controllers/RoomAcc");
+const RoomPurchase = require("../controllers/RoomPurchase");
 
 const calc = require("../utils/calc");
 
@@ -99,4 +101,30 @@ exports.update = async (id, company, type, areaM) => {
       },
     }
   );
+};
+
+exports.getAccTable = async (year, month) => {
+  const accs = (await RoomAcc.findAllByDate(year, month)).map(async (acc) => {
+    const room = (await Room.findOne({ where: { id: acc.roomId } })).dataValues;
+
+    const purchaseAmount = (
+      await RoomPurchase.findAllByRoomIdAndDate(room.id, year, month)
+    ).reduce((acc, cur) => acc + cur.amount, 0);
+
+    let accStatus = "미수납";
+    if (purchaseAmount >= acc.amount) accStatus = "수납완료";
+    else if (purchaseAmount > 0) accStatus = "부분수납";
+
+    return {
+      roomId: room.id,
+      company: room.company,
+      accView: room.id,
+      print: acc.id,
+      purchase: room.id,
+      accAmount: acc.amount,
+      purchaseAmount,
+      accStatus,
+    };
+  });
+  return await Promise.all(accs);
 };

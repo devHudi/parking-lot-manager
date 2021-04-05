@@ -46,3 +46,33 @@ exports.findAll = async () => {
   const obj = await PrivateCarAcc.findAll();
   return obj.map((row) => row.dataValues);
 };
+
+exports.findAllByDate = async (year, month) => {
+  const startDate = moment(`${year}/${month}/1`).startOf("month").toDate();
+  const endDate = moment(startDate).endOf("month").toDate();
+
+  const obj = await PrivateCarAcc.findAll({
+    where: {
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
+
+  return obj.map((row) => row.dataValues);
+};
+
+exports.findByPrivateCarIdAndDate = async (privateCarId, year, month) => {
+  const startDate = moment(`${year}/${month}/1`).startOf("month").toDate();
+  const endDate = moment(startDate).endOf("month").toDate();
+
+  const obj = await PrivateCarAcc.findOne({
+    where: {
+      privateCarId,
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
+  return obj.dataValues;
+};

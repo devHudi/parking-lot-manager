@@ -36,6 +36,11 @@ const init = () => {
     const { id } = args;
     event.returnValue = await Controllers.Room.getTotalStake(id);
   });
+
+  ipcMain.on("room-get-acc-table", async (event, args) => {
+    const { year, month } = args;
+    event.returnValue = await Controllers.Room.getAccTable(year, month);
+  });
 };
 
 module.exports = init;

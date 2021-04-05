@@ -6,7 +6,6 @@ const Op = require("Sequelize").Op;
 const RoomController = require("./Room");
 
 exports.create = async () => {
-  // 무료주차권 월간 일괄 지급
   const rooms = await RoomController.findAll();
 
   const startDate = moment().startOf("month").toDate();
@@ -45,5 +44,37 @@ exports.create = async () => {
 
 exports.findAll = async () => {
   const obj = await RoomAcc.findAll();
+  return obj.map((row) => row.dataValues);
+  // TODO: year, month 로 필터링 해야함
+};
+
+exports.findAllByDate = async (year, month) => {
+  const startDate = moment(`${year}/${month}/1`).startOf("month").toDate();
+  const endDate = moment(startDate).endOf("month").toDate();
+
+  const obj = await RoomAcc.findAll({
+    where: {
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
+
+  return obj.map((row) => row.dataValues);
+};
+
+exports.findByRoomIdAndDate = async (roomId, year, month) => {
+  const startDate = moment(`${year}/${month}/1`).startOf("month").toDate();
+  const endDate = moment(startDate).endOf("month").toDate();
+
+  const obj = await RoomAcc.findAll({
+    where: {
+      roomId,
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
+
   return obj.map((row) => row.dataValues);
 };

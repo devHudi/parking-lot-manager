@@ -10,7 +10,7 @@ import {
 import moment from "moment";
 import _ from "lodash";
 
-import { roomAccs, roomPurchases } from "apis";
+import { rooms, roomAccs } from "apis";
 
 import { useForceUpdate } from "hooks";
 
@@ -36,7 +36,7 @@ const RoomAccs = () => {
     },
     {
       title: "월정금액",
-      dataIndex: "amount",
+      dataIndex: "accAmount",
     },
     {
       title: "수납금액",
@@ -44,7 +44,7 @@ const RoomAccs = () => {
     },
     {
       title: "수납여부",
-      dataIndex: "accType",
+      dataIndex: "accStatus",
     },
     {
       title: "수납기록 조회",
@@ -87,35 +87,10 @@ const RoomAccs = () => {
     forceUpdate();
   };
 
-  const purchaseData = _.chain(
-    roomPurchases.findAllByDate(moment().format("YYYY"), moment().format("MM"))
-  )
-    .groupBy("roomId")
-    .map((row) => {
-      return {
-        roomId: row[0].roomId,
-        amount: _.reduce(row, (acc, cur) => acc + cur.amount, 0),
-      };
-    })
-    .value();
+  const year = moment().format("YYYY");
+  const month = moment().format("MM");
 
-  const data = roomAccs.findAll().map((acc) => {
-    const purchase = _.find(purchaseData, (data) => data.roomId === acc.roomId);
-    const purchaseAmount = purchase ? purchase.amount : 0;
-
-    let accType = "미수납";
-    if (purchaseAmount >= acc.amount) accType = "수납완료";
-    else if (purchaseAmount > 0) accType = "부분수납";
-
-    return {
-      ...acc,
-      purchaseAmount,
-      accType,
-      accView: acc.roomId,
-      print: acc.id,
-      purchase: acc.roomId,
-    };
-  });
+  const data = rooms.getAccTable(year, month);
 
   return (
     <>

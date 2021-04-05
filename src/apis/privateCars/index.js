@@ -59,12 +59,21 @@ const update = (
   return data;
 };
 
+const getAccTable = (year, month) => {
+  const data = ipcRenderer.sendSync("private-car-get-acc-table", {
+    year,
+    month,
+  });
+  return data;
+};
+
 const cars = {
   create,
   find,
   findAll,
   update,
   remove,
+  getAccTable,
 };
 
 export default cars;

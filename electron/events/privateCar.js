@@ -58,6 +58,11 @@ const init = () => {
       carRegisterAt
     );
   });
+
+  ipcMain.on("private-car-get-acc-table", async (event, args) => {
+    const { year, month } = args;
+    event.returnValue = await Controllers.PrivateCar.getAccTable(year, month);
+  });
 };
 
 module.exports = init;

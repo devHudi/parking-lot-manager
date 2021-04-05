@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import _ from "lodash";
 
-import { privateCarAccs, privateCarPurchases } from "apis";
+import { privateCars, privateCarAccs, privateCarPurchases } from "apis";
 
 import { useForceUpdate } from "hooks";
 
@@ -53,7 +53,7 @@ const PrivateCarAccs = () => {
     },
     {
       title: "월정금액",
-      dataIndex: "amount",
+      dataIndex: "accAmount",
     },
     {
       title: "수납금액",
@@ -61,7 +61,7 @@ const PrivateCarAccs = () => {
     },
     {
       title: "수납여부",
-      dataIndex: "accType",
+      dataIndex: "accStatus",
     },
     {
       title: "수납기록 조회",
@@ -104,41 +104,9 @@ const PrivateCarAccs = () => {
     forceUpdate();
   };
 
-  const purchaseData = _.chain(
-    privateCarPurchases.findAllByDate(
-      moment().format("YYYY"),
-      moment().format("MM")
-    )
-  )
-    .groupBy("privateCarId")
-    .map((row) => {
-      return {
-        privateCarId: row[0].privateCarId,
-        amount: _.reduce(row, (acc, cur) => acc + cur.amount, 0),
-      };
-    })
-    .value();
-
-  const data = privateCarAccs.findAll().map((acc) => {
-    const purchase = _.find(
-      purchaseData,
-      (data) => data.privateCarId === acc.privateCarId
-    );
-    const purchaseAmount = purchase ? purchase.amount : 0;
-
-    let accType = "미수납";
-    if (purchaseAmount >= acc.amount) accType = "수납완료";
-    else if (purchaseAmount > 0) accType = "부분수납";
-
-    return {
-      ...acc,
-      purchaseAmount,
-      accType,
-      accView: acc.privateCarId,
-      print: acc.id,
-      purchase: acc.privateCarId,
-    };
-  });
+  const year = moment().format("YYYY");
+  const month = moment().format("MM");
+  const data = privateCars.getAccTable(year, month);
 
   return (
     <>

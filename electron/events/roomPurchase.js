@@ -14,12 +14,12 @@ const init = () => {
     );
   });
 
-  ipcMain.on("room-acc-find-all-by-room-id", async (event, args) => {
+  ipcMain.on("room-purchase-find-all-by-room-id", async (event, args) => {
     const { roomId } = args;
     event.returnValue = await Controllers.RoomPurchase.findAllByRoomId(roomId);
   });
 
-  ipcMain.on("room-acc-find-all-by-date", async (event, args) => {
+  ipcMain.on("room-purchase-find-all-by-date", async (event, args) => {
     const { year, month } = args;
     event.returnValue = await Controllers.RoomPurchase.findAllByDate(
       year,
