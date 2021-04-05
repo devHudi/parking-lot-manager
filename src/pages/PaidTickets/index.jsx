@@ -40,6 +40,7 @@ const columns = [
   {
     title: "결제 방법",
     dataIndex: "payMethod",
+    render: (value) => (value === "card" ? "카드" : "현금"),
   },
   {
     title: "판매 일자",
