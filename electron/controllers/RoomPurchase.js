@@ -20,9 +20,9 @@ exports.findAllByRoomId = async (roomId) => {
     where: {
       roomId,
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-  // TODO: purchaseDate 로 내림차순 필요
 };
 
 exports.findAllByDate = async (year, month) => {
@@ -35,9 +35,9 @@ exports.findAllByDate = async (year, month) => {
         [Op.between]: [startDate, endDate],
       },
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-  // TODO: purchaseDate 로 내림차순 필요
 };
 
 exports.findAllByRoomIdAndDate = async (roomId, year, month) => {
@@ -51,8 +51,7 @@ exports.findAllByRoomIdAndDate = async (roomId, year, month) => {
         [Op.between]: [startDate, endDate],
       },
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-
-  // TODO: purchaseDate 로 내림차순 필요
 };

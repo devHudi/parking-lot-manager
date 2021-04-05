@@ -27,9 +27,9 @@ exports.findAllByPrivateCarId = async (privateCarId) => {
     where: {
       privateCarId,
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-  // TODO: purchaseDate 로 내림차순 필요
 };
 
 exports.findAllByDate = async (year, month) => {
@@ -42,9 +42,9 @@ exports.findAllByDate = async (year, month) => {
         [Op.between]: [startDate, endDate],
       },
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-  // TODO: purchaseDate 로 내림차순 필요
 };
 
 exports.findAllByPrivateCarIdAndDate = async (privateCarId, year, month) => {
@@ -58,8 +58,7 @@ exports.findAllByPrivateCarIdAndDate = async (privateCarId, year, month) => {
         [Op.between]: [startDate, endDate],
       },
     },
+    order: [["purchaseDate", "DESC"]],
   });
   return obj.map((row) => row.dataValues);
-
-  // TODO: purchaseDate 로 내림차순 필요
 };
