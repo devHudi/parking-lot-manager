@@ -81,6 +81,18 @@ const PrivateCarDetails = () => {
     );
   };
 
+  const handleRemove = () => {
+    if (
+      window.confirm(
+        "해당 차량을 정말로 삭제할까요? 차량 관련된 정보 (부과/수납 등) 이 모두 사라집니다."
+      )
+    ) {
+      privateCars.remove([carId]);
+      alert("차량이 제거되었습니다.");
+      history.push("/private-cars");
+    }
+  };
+
   return (
     <>
       <Breadcrumb
@@ -99,10 +111,13 @@ const PrivateCarDetails = () => {
           <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
             개인 차량 정보 저장
           </Button>
-          <Button type="danger" icon={<DeleteOutlined />}>
+          <Button
+            type="danger"
+            icon={<DeleteOutlined />}
+            onClick={handleRemove}
+          >
             개인 차량 삭제
           </Button>
-          {/* TODO: 개인차량 삭제 기능 개발 */}
         </SpaceBetween.Box>
         <SpaceBetween.Box>
           <Button
