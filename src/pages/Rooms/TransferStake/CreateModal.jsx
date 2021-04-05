@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FormModal, Fields } from "components";
 
-import { stakeTransfers } from "apis";
+import { stakeTransfers, rooms } from "apis";
 
 const CreateModal = ({ visible, onClose }) => {
   const { roomId } = useParams();
@@ -21,7 +21,13 @@ const CreateModal = ({ visible, onClose }) => {
 
   const handleOk = () => {
     const { room: receiveRoomId, amount, memo } = form;
-    stakeTransfers.create(roomId, receiveRoomId, amount, memo);
+
+    const isExists = rooms.isExists(receiveRoomId);
+    if (isExists) {
+      stakeTransfers.create(roomId, receiveRoomId, amount, memo);
+    } else {
+      alert("해당 호실이 존재하지 않습니다. 호실 입력을 다시 확인해주세요.");
+    }
     onClose();
   };
 
