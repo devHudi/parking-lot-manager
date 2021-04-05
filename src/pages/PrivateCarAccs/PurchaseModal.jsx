@@ -12,6 +12,16 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({
+      bank: "",
+      amount: 0,
+      fake: false,
+      purchaseDate: new Date(),
+      memo: "",
+    });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -30,10 +40,12 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
       memo
     );
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

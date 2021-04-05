@@ -12,6 +12,16 @@ const CreateModal = ({ visible, roomId, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({
+      carNumber: "",
+      carType: "",
+      owner: "",
+      contact: "",
+      memo: "",
+    });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -23,10 +33,12 @@ const CreateModal = ({ visible, roomId, onClose }) => {
     const { carNumber, carType, owner, contact, memo } = form;
     cars.create(roomId, carNumber, carType, owner, contact, memo);
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (
