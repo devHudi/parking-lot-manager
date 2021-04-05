@@ -6,6 +6,10 @@ import { privateCars, rooms } from "apis";
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({});
 
+  const clearForm = () => {
+    setForm({});
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -40,10 +44,12 @@ const CreateModal = ({ visible, onClose }) => {
     }
 
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

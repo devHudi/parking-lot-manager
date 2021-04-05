@@ -6,6 +6,10 @@ import { freeTickets } from "apis";
 const UseFreeTicketModal = ({ visible, roomId, onClose }) => {
   const [form, setForm] = useState({});
 
+  const clearForm = () => {
+    setForm({});
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -17,10 +21,12 @@ const UseFreeTicketModal = ({ visible, roomId, onClose }) => {
     const { amount, memo } = form;
     freeTickets.create(roomId, -amount, "USE", memo);
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

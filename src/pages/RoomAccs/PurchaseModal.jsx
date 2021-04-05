@@ -12,6 +12,16 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({
+      bank: "",
+      amount: 0,
+      fake: false,
+      purchaseDate: new Date(),
+      memo: "",
+    });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -23,10 +33,12 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
     const { bank, amount, fake, purchaseDate, memo } = form;
     roomPurchases.create(roomId, bank, amount, fake, purchaseDate, memo);
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

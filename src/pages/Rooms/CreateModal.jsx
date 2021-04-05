@@ -12,6 +12,16 @@ const CreateRoomModal = ({ visible, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({
+      room: "",
+      company: "",
+      type: "work",
+      areaM: 0,
+      memo: "",
+    });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -27,12 +37,14 @@ const CreateRoomModal = ({ visible, onClose }) => {
       alert("이미 존재하는 호실입니다.");
     } else {
       rooms.create(room, company, type, areaM, memo);
-      onClose();
     }
+    onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

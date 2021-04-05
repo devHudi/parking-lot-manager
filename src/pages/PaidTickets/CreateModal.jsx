@@ -18,6 +18,20 @@ const CreateModal = ({ visible, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({
+      carNumber: "",
+      carType: "",
+      owner: "",
+      contact: "",
+      payMethod: "",
+      period: "",
+      soldDate: moment(),
+      parkingDate: moment(),
+      memo: "",
+    });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -50,10 +64,12 @@ const CreateModal = ({ visible, onClose }) => {
       memo
     );
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (

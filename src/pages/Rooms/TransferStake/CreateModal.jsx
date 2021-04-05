@@ -12,6 +12,10 @@ const CreateModal = ({ visible, onClose }) => {
     memo: "",
   });
 
+  const clearForm = () => {
+    setForm({ room: "", amount: 1, memo: "" });
+  };
+
   const handleInput = (name, value) => {
     setForm({
       ...form,
@@ -29,10 +33,12 @@ const CreateModal = ({ visible, onClose }) => {
       alert("해당 호실이 존재하지 않습니다. 호실 입력을 다시 확인해주세요.");
     }
     onClose();
+    clearForm();
   };
 
   const handleCancel = () => {
     onClose();
+    clearForm();
   };
 
   return (
