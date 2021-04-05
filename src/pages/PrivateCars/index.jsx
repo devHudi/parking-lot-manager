@@ -58,9 +58,16 @@ const PrivateCars = () => {
   const forceUpdate = useForceUpdate();
 
   const handleRemove = (selected) => {
-    const idList = selected.map((row) => row.id);
-    privateCars.remove(idList);
-    forceUpdate();
+    if (
+      window.confirm(
+        "해당 차량을 정말로 삭제할까요? 차량 관련된 정보 (부과/수납 등) 이 모두 사라집니다."
+      )
+    ) {
+      const idList = selected.map((row) => row.id);
+      privateCars.remove(idList);
+      alert("차량이 제거되었습니다.");
+      forceUpdate();
+    }
   };
 
   const data = privateCars

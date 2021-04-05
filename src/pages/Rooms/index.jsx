@@ -88,7 +88,11 @@ const Rooms = () => {
   };
 
   const handleRemove = (selected) => {
-    if (window.confirm("선택한 항목을 정말로 삭제할까요?")) {
+    if (
+      window.confirm(
+        "선택한 항목을 정말로 삭제할까요? 호실과 관련된 정보 (지분이전, 차량, 부과/수납 등) 이 모두 사라집니다."
+      )
+    ) {
       const idList = selected.map((row) => row.id);
       rooms.remove(idList);
       forceUpdate();

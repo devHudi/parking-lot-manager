@@ -89,9 +89,15 @@ const RoomDetails = () => {
   };
 
   const handleRemove = () => {
-    rooms.remove([roomId]);
-    alert("호실이 제거되었습니다.");
-    history.push("/");
+    if (
+      window.confirm(
+        "해당 호실을 정말로 삭제할까요? 호실과 관련된 정보 (지분이전, 차량, 부과/수납 등) 이 모두 사라집니다."
+      )
+    ) {
+      rooms.remove([roomId]);
+      alert("호실이 제거되었습니다.");
+      history.push("/");
+    }
   };
 
   const stakes = stakeTransfers.findAllByRoomId(roomId);
