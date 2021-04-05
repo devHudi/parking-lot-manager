@@ -11,8 +11,6 @@ const roomPurchase = require("./roomPurchase");
 const privateCarAcc = require("./privateCarAcc");
 const privateCarPurchase = require("./privateCarPurchase");
 
-console.log({ privateCarAcc });
-
 const init = () => {
   db.connect();
 

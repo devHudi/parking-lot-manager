@@ -82,17 +82,18 @@ const Rooms = () => {
       onOk() {
         freeTickets.monthlyGiving();
         forceUpdate();
-      },
-      onCancel() {
-        console.log("취소");
+        alert("금월 주차권이 잔여 지분에 따라 지급되었습니다.");
       },
     });
   };
 
   const handleRemove = (selected) => {
-    const idList = selected.map((row) => row.id);
-    rooms.remove(idList);
-    forceUpdate();
+    if (window.confirm("선택한 항목을 정말로 삭제할까요?")) {
+      const idList = selected.map((row) => row.id);
+      rooms.remove(idList);
+      forceUpdate();
+      alert("삭제되었습니다.");
+    }
   };
 
   const data = rooms.findAll();

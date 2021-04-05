@@ -35,7 +35,6 @@ const PrivateCarAccDetails = () => {
   const { privateCarId } = useParams();
 
   const data = privateCarPurchases.findAllByPrivateCarId(privateCarId);
-  // console.log({ privateCarId });
 
   return (
     <>

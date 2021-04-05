@@ -21,15 +21,7 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
 
   const handleOk = () => {
     const { bank, amount, fake, purchaseDate, memo } = form;
-    const rsp = roomPurchases.create(
-      roomId,
-      bank,
-      amount,
-      fake,
-      purchaseDate,
-      memo
-    );
-    console.log({ rsp });
+    roomPurchases.create(roomId, bank, amount, fake, purchaseDate, memo);
     onClose();
   };
 
