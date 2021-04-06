@@ -1,4 +1,5 @@
 const PaidTicket = require("../models/PaidTicket");
+const Op = require("Sequelize").Op;
 
 const create = async (
   carNumber,
@@ -29,7 +30,9 @@ const create = async (
 };
 
 const findAll = async () => {
-  const obj = await PaidTicket.findAll();
+  const obj = await PaidTicket.findAll({
+    order: [["soldDate", "DESC"]],
+  });
   return obj.map((row) => row.dataValues);
 };
 
@@ -37,10 +40,11 @@ const findAllByDate = async (startDate, endDate) => {
   const obj = (
     await PaidTicket.findAll({
       where: {
-        from: {
-          $between: [startDate, endDate],
+        soldDate: {
+          [Op.between]: [startDate, endDate],
         },
       },
+      order: [["soldDate", "DESC"]],
     })
   ).map((row) => row.dataValues);
 

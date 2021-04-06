@@ -56,9 +56,16 @@ const columns = [
 const PaidTickets = () => {
   const [modal, setModal] = useState(false);
 
+  const [startDate, setStartDate] = useState(
+    moment(moment().subtract(1, "months"), consts.DATE_FORMAT).toDate()
+  );
+  const [endDate, setEndDate] = useState(
+    moment(new Date(), consts.DATE_FORMAT).toDate()
+  );
+
   const forceUpdate = useForceUpdate();
 
-  const data = paidTickets.findAll();
+  const data = paidTickets.findAll(startDate, endDate);
   // TODO: 날짜 필터링 및 검색 기능 추가해야함
 
   const handleRemove = (selected) => {
@@ -83,10 +90,11 @@ const PaidTickets = () => {
       >
         <DatePicker.RangePicker
           placeholder={["시작 날짜", "마지막 날짜"]}
-          defaultValue={[
-            moment(moment().subtract(1, "months"), consts.DATE_FORMAT),
-            moment(new Date(), consts.DATE_FORMAT),
-          ]}
+          defaultValue={[moment(startDate), moment(endDate)]}
+          onChange={(dates) => {
+            setStartDate(dates[0].toDate());
+            setEndDate(dates[1].toDate());
+          }}
         />
       </PageTable>
     </>
