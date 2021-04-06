@@ -53,7 +53,8 @@ const columns = [
 const PrivateCars = () => {
   const history = useHistory();
   const [modal, setModal] = useState(false);
-  const [searchMethod, setSearchMethod] = useState("room");
+  const [searchMethod, setSearchMethod] = useState("roomId");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const forceUpdate = useForceUpdate();
 
@@ -74,6 +75,13 @@ const PrivateCars = () => {
     .findAll()
     .map((row) => ({ ...row, monthlyAmount: 110000 }));
 
+  const filteredData =
+    searchKeyword === ""
+      ? data
+      : data.filter((row) => {
+          return row[searchMethod].indexOf(searchKeyword) !== -1;
+        });
+
   return (
     <>
       <CreateModal visible={modal} onClose={() => setModal(false)} />
@@ -84,28 +92,29 @@ const PrivateCars = () => {
       <PageTable
         name="개인 차량"
         columns={columns}
-        data={data}
+        data={filteredData}
         onAddClick={() => setModal(true)}
         onRemoveClick={handleRemove}
         onRowClick={(data) => history.push(`/private-cars/${data.id}`)}
       >
         <Select
-          defaultValue="room"
+          defaultValue="roomId"
           onChange={(value) => setSearchMethod(value)}
         >
-          <Select.Option value="room">호실</Select.Option>
+          <Select.Option value="roomId">호실</Select.Option>
           <Select.Option value="company">입주사</Select.Option>
           <Select.Option value="carNumber">차량번호</Select.Option>
           <Select.Option value="carType">차종</Select.Option>
           <Select.Option value="owner">차주</Select.Option>
           <Select.Option value="contact">연락처</Select.Option>
         </Select>
-        <Input.Search
+        <Input
           placeholder="검색어"
           allowClear
+          onChange={(e) => {
+            setSearchKeyword(e.target.value);
+          }}
           enterButton
-          onSearch={(value) => console.log({ searchMethod, value })}
-          /* TODO: 검색 가능하도록 해야함 */
         />
       </PageTable>
     </>

@@ -15,8 +15,13 @@ const stake = (m, type = "work") => {
   return _.round(p / standard, 2);
 };
 
+const range = (start, end) => {
+  return new Array(end - start + 1).fill(undefined).map((_, i) => i + start);
+};
+
 module.exports = {
   m2p,
   p2m,
   stake,
+  range,
 };

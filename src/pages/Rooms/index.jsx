@@ -67,7 +67,8 @@ const columns = [
 
 const Rooms = () => {
   const [modal, setModal] = useState(false);
-  const [searchMethod, setSearchMethod] = useState("room");
+  const [searchMethod, setSearchMethod] = useState("id");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const forceUpdate = useForceUpdate();
 
@@ -102,6 +103,13 @@ const Rooms = () => {
 
   const data = rooms.findAll();
 
+  const filteredData =
+    searchKeyword === ""
+      ? data
+      : data.filter((row) => {
+          return row[searchMethod].indexOf(searchKeyword) !== -1;
+        });
+
   return (
     <>
       <CreateModal visible={modal} onClose={() => setModal(false)} />
@@ -112,7 +120,7 @@ const Rooms = () => {
       <PageTable
         name="호실"
         columns={columns}
-        data={data}
+        data={filteredData}
         onAddClick={() => setModal(true)}
         onRemoveClick={handleRemove}
         onRowClick={(data) => history.push(`/rooms/${data.id}`)}
@@ -120,19 +128,17 @@ const Rooms = () => {
         <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
           금월 주차권 지급
         </Button>
-        <Select
-          defaultValue="room"
-          onChange={(value) => setSearchMethod(value)}
-        >
-          <Select.Option value="room">호실</Select.Option>
+        <Select defaultValue="id" onChange={(value) => setSearchMethod(value)}>
+          <Select.Option value="id">호실</Select.Option>
           <Select.Option value="company">입주사</Select.Option>
         </Select>
-        <Input.Search
+        <Input
           placeholder="검색어"
           allowClear
+          onChange={(e) => {
+            setSearchKeyword(e.target.value);
+          }}
           enterButton
-          onSearch={(value) => console.log({ searchMethod, value })}
-          /* TODO: 검색 가능하도록 해야함 */
         />
       </PageTable>
     </>
