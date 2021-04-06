@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 const RoomAcc = require("../models/RoomAcc");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const RoomController = require("./Room");
 

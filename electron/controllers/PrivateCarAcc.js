@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 const PrivateCarAcc = require("../models/PrivateCarAcc");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const PrivateCar = require("./PrivateCar");
 

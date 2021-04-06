@@ -1,5 +1,5 @@
 const StakeTransfer = require("../models/StakeTransfer");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const create = async (sendRoomId, receiveRoomId, amount, memo) => {
   return await StakeTransfer.create({

@@ -1,5 +1,5 @@
 const PaidTicket = require("../models/PaidTicket");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const create = async (
   carNumber,

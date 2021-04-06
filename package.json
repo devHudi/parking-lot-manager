@@ -37,7 +37,7 @@
     "extends": null,
     "files": [
       "build/**/*",
-      "electron/*"
+      "electron/**/*"
     ]
   },
   "eslintConfig": {

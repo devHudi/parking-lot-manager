@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 const PrivateCarPurchase = require("../models/PrivateCarPurchase");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 exports.create = async (
   privateCarId,

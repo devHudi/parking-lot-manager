@@ -1,4 +1,4 @@
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const Room = require("../models/Room");
 const Car = require("../models/Car");

@@ -1,7 +1,7 @@
 const moment = require("moment");
 
 const FreeTicket = require("../models/FreeTicket");
-const Op = require("Sequelize").Op;
+const Op = require("sequelize").Op;
 
 const RoomController = require("./Room");
 
