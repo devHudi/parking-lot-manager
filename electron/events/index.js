@@ -10,6 +10,7 @@ const roomAcc = require("./roomAcc");
 const roomPurchase = require("./roomPurchase");
 const privateCarAcc = require("./privateCarAcc");
 const privateCarPurchase = require("./privateCarPurchase");
+const fileDialog = require("./fileDialog");
 
 const init = () => {
   db.connect();
@@ -24,6 +25,7 @@ const init = () => {
   roomPurchase();
   privateCarAcc();
   privateCarPurchase();
+  fileDialog();
 };
 
 module.exports = { init };

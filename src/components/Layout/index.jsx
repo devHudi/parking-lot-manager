@@ -7,6 +7,8 @@ import {
   NotificationOutlined,
 } from "@ant-design/icons";
 
+import { fileDialog } from "apis";
+
 const { Header, Content, Sider } = Layout;
 
 const Logo = styled.div`
@@ -76,6 +78,14 @@ const DefaultLayout = ({ children }) => {
               onClick={() => history.push("/paid-tickets")}
             >
               주차권 판매 관리
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item
+              icon={<LaptopOutlined />}
+              key="5"
+              onClick={() => console.log(fileDialog.importCsv())}
+            >
+              엑셀에서 불러오기
             </Menu.Item>
           </Menu>
         </Sider>

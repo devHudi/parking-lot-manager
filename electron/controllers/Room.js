@@ -54,6 +54,21 @@ exports.create = async (id, company, type, areaM, memo) => {
   });
 };
 
+exports.importCsv = async (csvData) => {
+  const data = csvData.map((row) => {
+    const [id, areaM, company, type] = row;
+    return {
+      id,
+      areaM,
+      company,
+      type: type === "업무" ? "work" : "store",
+      defaultStake: calc.stake(areaM),
+    };
+  });
+
+  return await Room.bulkCreate(data);
+};
+
 exports.findAll = async () => {
   const room = (await Room.findAll()).map(async (row) => {
     const totalStake = await getTotalStake(row.id);
