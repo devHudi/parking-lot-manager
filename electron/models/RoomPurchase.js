@@ -15,6 +15,10 @@ const RoomPurchase = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    payMethod: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     bank: {
       type: DataTypes.STRING,
       allowNull: true,

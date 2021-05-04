@@ -11,7 +11,7 @@ const CreateModal = ({ visible, onClose }) => {
     carType: "",
     owner: "",
     contact: "",
-    payMethod: "",
+    payMethod: "cash",
     period: "",
     soldDate: moment(),
     parkingDate: moment(),
@@ -108,11 +108,17 @@ const CreateModal = ({ visible, onClose }) => {
         value={form.payMethod}
         label="납부 방법"
         items={[
-          { label: "카드", value: "card" },
           { label: "현금", value: "cash" },
+          { label: "카드", value: "card" },
         ]}
         onChange={(value) => {
           handleInput("payMethod", value);
+        }}
+      />
+      <Fields.Text
+        label={form.payMethod === "cash" ? "납부 은행" : "카드사"}
+        onChange={(value) => {
+          handleInput("bank", value);
         }}
       />
       <Fields.Dropdown
@@ -125,12 +131,6 @@ const CreateModal = ({ visible, onClose }) => {
         ]}
         onChange={(value) => {
           handleInput("period", value);
-        }}
-      />
-      <Fields.Text
-        label="납부 은행"
-        onChange={(value) => {
-          handleInput("bank", value);
         }}
       />
       <Fields.DatePicker

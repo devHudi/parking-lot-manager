@@ -3,9 +3,10 @@ const Controllers = require("../controllers");
 
 const init = () => {
   ipcMain.on("room-purchase-create", async (event, args) => {
-    const { roomId, bank, amount, fake, purchaseDate, memo } = args;
+    const { roomId, payMethod, bank, amount, fake, purchaseDate, memo } = args;
     event.returnValue = await Controllers.RoomPurchase.create(
       roomId,
+      payMethod,
       bank,
       amount,
       fake,

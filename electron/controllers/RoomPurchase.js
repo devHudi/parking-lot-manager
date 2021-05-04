@@ -3,9 +3,18 @@ const moment = require("moment");
 const RoomPurchase = require("../models/RoomPurchase");
 const Op = require("sequelize").Op;
 
-exports.create = async (roomId, bank, amount, fake, purchaseDate, memo) => {
+exports.create = async (
+  roomId,
+  payMethod,
+  bank,
+  amount,
+  fake,
+  purchaseDate,
+  memo
+) => {
   const obj = await RoomPurchase.create({
     roomId,
+    payMethod,
     bank,
     amount,
     fake,

@@ -1,8 +1,17 @@
 const { ipcRenderer } = window.require("electron");
 
-const create = (privateCarId, bank, amount, fake, purchaseDate, memo) => {
+const create = (
+  privateCarId,
+  payMethod,
+  bank,
+  amount,
+  fake,
+  purchaseDate,
+  memo
+) => {
   const data = ipcRenderer.sendSync("private-car-purchase-create", {
     privateCarId,
+    payMethod,
     bank,
     amount,
     fake,

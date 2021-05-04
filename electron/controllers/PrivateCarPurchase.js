@@ -5,6 +5,7 @@ const Op = require("sequelize").Op;
 
 exports.create = async (
   privateCarId,
+  payMethod,
   bank,
   amount,
   fake,
@@ -13,6 +14,7 @@ exports.create = async (
 ) => {
   const obj = await PrivateCarPurchase.create({
     privateCarId,
+    payMethod,
     bank,
     amount,
     fake,

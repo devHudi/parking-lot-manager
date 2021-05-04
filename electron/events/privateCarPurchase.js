@@ -3,9 +3,18 @@ const Controllers = require("../controllers");
 
 const init = () => {
   ipcMain.on("private-car-purchase-create", async (event, args) => {
-    const { privateCarId, bank, amount, fake, purchaseDate, memo } = args;
+    const {
+      privateCarId,
+      payMethod,
+      bank,
+      amount,
+      fake,
+      purchaseDate,
+      memo,
+    } = args;
     event.returnValue = await Controllers.PrivateCarPurchase.create(
       privateCarId,
+      payMethod,
       bank,
       amount,
       fake,

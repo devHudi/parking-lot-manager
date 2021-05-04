@@ -5,6 +5,7 @@ import { privateCarPurchases } from "apis";
 
 const PurchaseModal = ({ visible, privateCarId, onClose }) => {
   const [form, setForm] = useState({
+    payMethod: "cash",
     bank: "",
     amount: 0,
     fake: false,
@@ -30,9 +31,10 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
   };
 
   const handleOk = () => {
-    const { bank, amount, fake, purchaseDate, memo } = form;
+    const { bank, payMethod, amount, fake, purchaseDate, memo } = form;
     privateCarPurchases.create(
       privateCarId,
+      payMethod,
       bank,
       amount,
       fake,
@@ -62,8 +64,19 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
           handleInput("amount", value);
         }}
       />
+      <Fields.Dropdown
+        value={form.payMethod}
+        label="납부 방법"
+        items={[
+          { label: "현금", value: "cash" },
+          { label: "카드", value: "card" },
+        ]}
+        onChange={(value) => {
+          handleInput("payMethod", value);
+        }}
+      />
       <Fields.Text
-        label="납부 은행"
+        label={form.payMethod === "cash" ? "납부 은행" : "카드사"}
         onChange={(value) => {
           handleInput("bank", value);
         }}
