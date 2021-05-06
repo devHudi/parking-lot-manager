@@ -94,24 +94,28 @@ const CreateModal = ({ visible, onClose }) => {
     >
       <Fields.Text
         label="차량번호"
+        value={form.carNumber}
         onChange={(value) => {
           handleInput("carNumber", value);
         }}
       />
       <Fields.Text
         label="차종"
+        value={form.carType}
         onChange={(value) => {
           handleInput("carType", value);
         }}
       />
       <Fields.Text
         label="차주"
+        value={form.owner}
         onChange={(value) => {
           handleInput("owner", value);
         }}
       />
       <Fields.Text
         label="연락처"
+        value={form.contact}
         onChange={(value) => {
           handleInput("contact", value);
         }}
@@ -129,6 +133,7 @@ const CreateModal = ({ visible, onClose }) => {
       />
       <Fields.Text
         label={form.payMethod === "cash" ? "납부 은행" : "카드사"}
+        value={form.payMethod}
         onChange={(value) => {
           handleInput("bank", value);
         }}
@@ -136,6 +141,7 @@ const CreateModal = ({ visible, onClose }) => {
       {form.payMethod === "cash" && (
         <Fields.Text
           label="입금자"
+          value={form.depositor}
           onChange={(value) => {
             handleInput("depositor", value);
           }}
@@ -155,12 +161,14 @@ const CreateModal = ({ visible, onClose }) => {
       />
       <Fields.DatePicker
         label="판매 일자"
+        value={moment(form.soldDate)}
         onChange={(value) => {
           handleInput("soldDate", value);
         }}
       />
       <Fields.DatePicker
         label="주차 일자"
+        value={moment(form.parkingDate)}
         onChange={(value) => {
           handleInput("parkingDate", value);
         }}
@@ -192,6 +200,7 @@ const CreateModal = ({ visible, onClose }) => {
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}

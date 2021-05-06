@@ -51,18 +51,21 @@ const CreateModal = ({ visible, onClose }) => {
     >
       <Fields.Number
         label="이전할 지분 양"
+        value={form.amount}
         onChange={(value) => {
           handleInput("amount", value);
         }}
       />
       <Fields.Text
         label="이전 대상 호실"
+        value={form.room}
         onChange={(value) => {
           handleInput("room", value);
         }}
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}

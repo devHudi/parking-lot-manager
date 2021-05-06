@@ -52,30 +52,35 @@ const CreateModal = ({ visible, roomId, onClose }) => {
       <Fields.Text disabled value={roomId} label="호실" />
       <Fields.Text
         label="차 번호"
+        value={form.carNumber}
         onChange={(value) => {
           handleInput("carNumber", value);
         }}
       />
       <Fields.Text
         label="차종"
+        value={form.carType}
         onChange={(value) => {
           handleInput("carType", value);
         }}
       />
       <Fields.Text
         label="차 주인"
+        value={form.owner}
         onChange={(value) => {
           handleInput("owner", value);
         }}
       />
       <Fields.Text
         label="차주 연락처"
+        value={form.contact}
         onChange={(value) => {
           handleInput("contact", value);
         }}
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}

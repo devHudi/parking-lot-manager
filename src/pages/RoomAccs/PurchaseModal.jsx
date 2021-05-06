@@ -1,4 +1,5 @@
 import { useState } from "react";
+import moment from "moment";
 import { FormModal, Fields } from "components";
 
 import { roomPurchases } from "apis";
@@ -19,7 +20,6 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
   const clearForm = () => {
     setForm({
       payMethod: "cash",
-      depositor: "",
       depositor: "",
       bank: "",
       amount: 0,
@@ -82,6 +82,7 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       <Fields.Number label="호실" value={roomId} disabled />
       <Fields.Number
         label="납부 금액"
+        value={form.amount}
         onChange={(value) => {
           handleInput("amount", value);
         }}
@@ -99,6 +100,7 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       />
       <Fields.Text
         label={form.payMethod === "cash" ? "납부 은행" : "카드사"}
+        value={form.bank}
         onChange={(value) => {
           handleInput("bank", value);
         }}
@@ -106,6 +108,7 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       {form.payMethod === "cash" && (
         <Fields.Text
           label="입금자"
+          value={form.depositor}
           onChange={(value) => {
             handleInput("depositor", value);
           }}
@@ -113,6 +116,7 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       )}
       <Fields.DatePicker
         label="납부 날짜"
+        value={moment(form.purchaseDate)}
         onChange={(value) => {
           handleInput("purchaseDate", value);
         }}
@@ -144,11 +148,13 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}
       />
       <Fields.CheckBox
+        value={form.fake}
         onChange={(value) => {
           handleInput("fake", value);
         }}

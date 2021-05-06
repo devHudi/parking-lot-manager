@@ -1,4 +1,5 @@
 import { useState } from "react";
+import moment from "moment";
 import { FormModal, Fields } from "components";
 
 import { privateCars, rooms } from "apis";
@@ -62,42 +63,49 @@ const CreateModal = ({ visible, onClose }) => {
     >
       <Fields.Text
         label="호실 명"
+        value={form.roomId}
         onChange={(value) => {
           handleInput("roomId", value);
         }}
       />
       <Fields.Text
         label="차주 성명"
+        value={form.owner}
         onChange={(value) => {
           handleInput("owner", value);
         }}
       />
       <Fields.Text
         label="차주 연락처"
+        value={form.contact}
         onChange={(value) => {
           handleInput("contact", value);
         }}
       />
       <Fields.Text
         label="차량번호"
+        value={form.carNumber}
         onChange={(value) => {
           handleInput("carNumber", value);
         }}
       />
       <Fields.Text
         label="차종"
+        value={form.carType}
         onChange={(value) => {
           handleInput("carType", value);
         }}
       />
       <Fields.DatePicker
         label="등록일자"
+        value={moment(form.carRegisterAt)}
         onChange={(value) => {
           handleInput("carRegisterAt", value);
         }}
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}

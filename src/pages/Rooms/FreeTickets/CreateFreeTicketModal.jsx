@@ -39,12 +39,14 @@ const CreateFreeTicketModal = ({ visible, roomId, onClose }) => {
     >
       <Fields.Number
         label="발행할 주차권 장수"
+        value={form.amount}
         onChange={(value) => {
           handleInput("amount", value);
         }}
       />
       <Fields.Text
         label="비고"
+        value={form.memo}
         onChange={(value) => {
           handleInput("memo", value);
         }}
