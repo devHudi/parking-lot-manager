@@ -6,6 +6,7 @@ import { privateCarPurchases } from "apis";
 const PurchaseModal = ({ visible, privateCarId, onClose }) => {
   const [form, setForm] = useState({
     payMethod: "cash",
+    depositor: "",
     bank: "",
     amount: 0,
     fake: false,
@@ -18,6 +19,7 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
   const clearForm = () => {
     setForm({
       payMethod: "cash",
+      depositor: "",
       bank: "",
       amount: 0,
       fake: false,
@@ -39,6 +41,7 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
     const {
       bank,
       payMethod,
+      depositor,
       amount,
       fake,
       purchaseDate,
@@ -49,6 +52,7 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
     privateCarPurchases.create(
       privateCarId,
       payMethod,
+      payMethod === "cash" ? depositor : null,
       bank,
       amount,
       fake,
@@ -97,6 +101,14 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
           handleInput("bank", value);
         }}
       />
+      {form.payMethod === "cash" && (
+        <Fields.Text
+          label="입금자"
+          onChange={(value) => {
+            handleInput("depositor", value);
+          }}
+        />
+      )}
       <Fields.DatePicker
         label="납부 날짜"
         onChange={(value) => {

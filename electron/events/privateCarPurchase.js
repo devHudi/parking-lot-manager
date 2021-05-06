@@ -6,6 +6,7 @@ const init = () => {
     const {
       privateCarId,
       payMethod,
+      depositor,
       bank,
       amount,
       fake,
@@ -17,6 +18,7 @@ const init = () => {
     event.returnValue = await Controllers.PrivateCarPurchase.create(
       privateCarId,
       payMethod,
+      depositor,
       bank,
       amount,
       fake,

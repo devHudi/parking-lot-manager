@@ -3,6 +3,7 @@ const { ipcRenderer } = window.require("electron");
 const create = (
   roomId,
   payMethod,
+  depositor,
   bank,
   amount,
   fake,
@@ -14,6 +15,7 @@ const create = (
   const data = ipcRenderer.sendSync("room-purchase-create", {
     roomId,
     payMethod,
+    depositor,
     bank,
     amount,
     fake,

@@ -12,6 +12,7 @@ const CreateModal = ({ visible, onClose }) => {
     owner: "",
     contact: "",
     payMethod: "cash",
+    depositor: "",
     period: "",
     soldDate: moment(),
     parkingDate: moment(),
@@ -27,6 +28,7 @@ const CreateModal = ({ visible, onClose }) => {
       owner: "",
       contact: "",
       payMethod: "",
+      depositor: "",
       period: "",
       soldDate: moment(),
       parkingDate: moment(),
@@ -50,6 +52,7 @@ const CreateModal = ({ visible, onClose }) => {
       owner,
       contact,
       payMethod,
+      depositor,
       period,
       soldDate,
       parkingDate,
@@ -64,6 +67,7 @@ const CreateModal = ({ visible, onClose }) => {
       owner,
       contact,
       payMethod,
+      payMethod === "cash" ? depositor : null,
       period,
       soldDate,
       parkingDate,
@@ -129,6 +133,14 @@ const CreateModal = ({ visible, onClose }) => {
           handleInput("bank", value);
         }}
       />
+      {form.payMethod === "cash" && (
+        <Fields.Text
+          label="입금자"
+          onChange={(value) => {
+            handleInput("depositor", value);
+          }}
+        />
+      )}
       <Fields.Dropdown
         value={form.period}
         label="기간"

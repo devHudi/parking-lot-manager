@@ -31,6 +31,10 @@ const PaidTicket = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    depositor: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     period: {
       type: DataTypes.STRING,
       allowNull: true,

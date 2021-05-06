@@ -19,6 +19,10 @@ const PrivateCarPurchase = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    depositor: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     bank: {
       type: DataTypes.STRING,
       allowNull: true,

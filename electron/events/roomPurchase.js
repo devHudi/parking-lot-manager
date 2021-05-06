@@ -6,6 +6,7 @@ const init = () => {
     const {
       roomId,
       payMethod,
+      depositor,
       bank,
       amount,
       fake,
@@ -17,6 +18,7 @@ const init = () => {
     event.returnValue = await Controllers.RoomPurchase.create(
       roomId,
       payMethod,
+      depositor,
       bank,
       amount,
       fake,
