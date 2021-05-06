@@ -8,7 +8,7 @@ const init = () => {
   ipcMain.on("import-spread-sheet", async (event, args) => {
     const filePath = dialog.showOpenDialogSync({ properties: ["openFile"] });
 
-    if (filePath.length > 0) {
+    if (filePath !== undefined) {
       const rawData = fs.readFileSync(filePath[0]);
 
       const parsedData = parse(rawData.toString("utf-8"), {
@@ -17,6 +17,7 @@ const init = () => {
 
       event.returnValue = await Controllers.Room.importCsv(parsedData);
     }
+    event.returnValue = null;
   });
 };
 
