@@ -8,6 +8,7 @@ const RoomAcc = require("./RoomAcc");
 const RoomPurchase = require("./RoomPurchase");
 const PrivateCarAcc = require("./PrivateCarAcc");
 const PrivateCarPurchase = require("./PrivateCarPurchase");
+const DailyReport = require("./DailyReport");
 
 module.exports = {
   Room,
@@ -20,4 +21,5 @@ module.exports = {
   RoomPurchase,
   PrivateCarAcc,
   PrivateCarPurchase,
+  DailyReport,
 };

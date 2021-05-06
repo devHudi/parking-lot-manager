@@ -32,4 +32,6 @@ ReactDOM.render(
   TODO: 모든 숫자에 쉼표
   TODO: Redux 로 관리되는 Global 스피너 추가
   TODO: 호실, 개인차량 리스트 리덕스로 관리
+  TODO: 모든 통신 비동기로 변경
+  TODO: paidTicket 시간 별 가격
 */

@@ -13,6 +13,7 @@ import RoomsRouter from "./rooms";
 import RoomAccsRouter from "./roomAccs";
 import PrivateCarsRouter from "./privateCars";
 import PrivateCarAccsRouter from "./privateCarAccs";
+import DailyReport from "./dailyReport";
 
 const DefaultRouter = () => {
   return (
@@ -36,6 +37,9 @@ const DefaultRouter = () => {
           </Route>
           <Route exact path="/paid-tickets">
             <PaidTickets />
+          </Route>
+          <Route exact path="/daily-report">
+            <DailyReport />
           </Route>
         </Layout>
       </Switch>
