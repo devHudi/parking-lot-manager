@@ -66,7 +66,7 @@ const PaidTickets = () => {
   const forceUpdate = useForceUpdate();
 
   const data = paidTickets.findAll(startDate, endDate);
-  // TODO: 날짜 필터링 및 검색 기능 추가해야함
+  // TODO: 검색 기능 추가
 
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);

@@ -45,7 +45,6 @@ exports.create = async () => {
 exports.findAll = async () => {
   const obj = await RoomAcc.findAll();
   return obj.map((row) => row.dataValues);
-  // TODO: year, month 로 필터링 해야함
 };
 
 exports.findAllByDate = async (year, month) => {

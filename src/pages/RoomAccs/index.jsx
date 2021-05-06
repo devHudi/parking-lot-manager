@@ -158,6 +158,6 @@ const RoomAccs = () => {
     </>
   );
 };
-// TODO: 검색기능 및 년,월 별 필터링 만들어야함
+// TODO: 검색 기능 추가
 
 export default RoomAccs;
