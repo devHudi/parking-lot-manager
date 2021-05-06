@@ -38,9 +38,23 @@ const columns = [
     dataIndex: "period",
   },
   {
-    title: "결제 방법",
+    title: "결제 수단",
     dataIndex: "payMethod",
     render: (value) => (value === "card" ? "카드" : "현금"),
+  },
+  {
+    title: "수납 은행 (카드사)",
+    dataIndex: "bank",
+  },
+  {
+    title: "결제 수단",
+    dataIndex: "payMethod",
+    render: (value) => (value === "cash" ? "현금" : "카드"),
+  },
+  {
+    title: "세계",
+    dataIndex: "isRnE",
+    render: (value) => (value ? "O" : "X"),
   },
   {
     title: "판매 일자",

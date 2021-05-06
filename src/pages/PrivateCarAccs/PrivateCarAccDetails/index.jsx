@@ -12,8 +12,18 @@ const columns = [
     dataIndex: "amount",
   },
   {
-    title: "수납 은행",
+    title: "수납 은행 (카드사)",
     dataIndex: "bank",
+  },
+  {
+    title: "결제 수단",
+    dataIndex: "payMethod",
+    render: (value) => (value === "cash" ? "현금" : "카드"),
+  },
+  {
+    title: "세계",
+    dataIndex: "isRnE",
+    render: (value) => (value ? "O" : "X"),
   },
   {
     title: "가수납 여부",
