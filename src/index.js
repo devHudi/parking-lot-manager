@@ -20,4 +20,6 @@ ReactDOM.render(
   TODO: 무료주차권 소수점 문제
   TODO: 지분이 -가 될 것 같으면 지분 이전 불가능하도록
   TODO: 모든 숫자에 쉼표
+  TODO: Redux 로 관리되는 Global 스피너 추가
+  TODO: 호실, 개인차량 리스트 리덕스로 관리
 */
