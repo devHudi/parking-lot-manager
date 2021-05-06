@@ -133,7 +133,7 @@ const CreateModal = ({ visible, onClose }) => {
       />
       <Fields.Text
         label={form.payMethod === "cash" ? "납부 은행" : "카드사"}
-        value={form.payMethod}
+        value={form.bank}
         onChange={(value) => {
           handleInput("bank", value);
         }}
