@@ -10,6 +10,8 @@ exports.create = async (
   amount,
   fake,
   purchaseDate,
+  isRnE,
+  RCM,
   memo
 ) => {
   const obj = await RoomPurchase.create({
@@ -19,6 +21,8 @@ exports.create = async (
     amount,
     fake,
     purchaseDate,
+    isRnE,
+    RCM,
     memo,
   });
   return obj.dataValues;

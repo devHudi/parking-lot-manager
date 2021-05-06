@@ -10,15 +10,20 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
     amount: 0,
     fake: false,
     purchaseDate: new Date(),
+    isRnE: false,
+    RCM: "R",
     memo: "",
   });
 
   const clearForm = () => {
     setForm({
+      payMethod: "cash",
       bank: "",
       amount: 0,
       fake: false,
       purchaseDate: new Date(),
+      isRnE: false,
+      RCM: "R",
       memo: "",
     });
   };
@@ -31,7 +36,16 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
   };
 
   const handleOk = () => {
-    const { bank, payMethod, amount, fake, purchaseDate, memo } = form;
+    const {
+      bank,
+      payMethod,
+      amount,
+      fake,
+      purchaseDate,
+      isRnE,
+      RCM,
+      memo,
+    } = form;
     roomPurchases.create(
       roomId,
       payMethod,
@@ -39,6 +53,8 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       amount,
       fake,
       purchaseDate,
+      payMethod === "cash" ? isRnE : null,
+      RCM,
       memo
     );
     onClose();
@@ -86,6 +102,31 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
         label="납부 날짜"
         onChange={(value) => {
           handleInput("purchaseDate", value);
+        }}
+      />
+      {form.payMethod === "cash" && (
+        <Fields.Dropdown
+          value={form.isRnE}
+          label="세계"
+          items={[
+            { label: "O", value: true },
+            { label: "X", value: false },
+          ]}
+          onChange={(value) => {
+            handleInput("isRnE", value);
+          }}
+        />
+      )}
+      <Fields.Dropdown
+        value={form.RCM}
+        label="RCM"
+        items={[
+          { label: "R", value: "R" },
+          { label: "C", value: "C" },
+          { label: "M", value: "M" },
+        ]}
+        onChange={(value) => {
+          handleInput("RCM", value);
         }}
       />
       <Fields.Text

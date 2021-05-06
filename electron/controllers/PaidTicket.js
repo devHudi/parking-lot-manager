@@ -10,6 +10,8 @@ const create = async (
   period,
   soldDate,
   parkingDate,
+  isRnE,
+  RCM,
   memo
 ) => {
   if (period !== "30M" && period !== "1H" && period !== "1D") {
@@ -25,6 +27,8 @@ const create = async (
     period,
     soldDate,
     parkingDate,
+    isRnE,
+    RCM,
     memo,
   });
 };

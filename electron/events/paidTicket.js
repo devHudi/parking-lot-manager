@@ -12,6 +12,8 @@ const init = () => {
       period,
       soldDate,
       parkingDate,
+      isRnE,
+      RCM,
       memo,
     } = args;
 
@@ -24,6 +26,8 @@ const init = () => {
       period,
       soldDate,
       parkingDate,
+      isRnE,
+      RCM,
       memo
     );
   });

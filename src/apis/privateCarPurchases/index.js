@@ -7,6 +7,8 @@ const create = (
   amount,
   fake,
   purchaseDate,
+  isRnE,
+  RCM,
   memo
 ) => {
   const data = ipcRenderer.sendSync("private-car-purchase-create", {
@@ -16,6 +18,8 @@ const create = (
     amount,
     fake,
     purchaseDate,
+    isRnE,
+    RCM,
     memo,
   });
   return data;

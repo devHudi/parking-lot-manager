@@ -15,6 +15,8 @@ const CreateModal = ({ visible, onClose }) => {
     period: "",
     soldDate: moment(),
     parkingDate: moment(),
+    isRnE: false,
+    RCM: "R",
     memo: "",
   });
 
@@ -28,6 +30,8 @@ const CreateModal = ({ visible, onClose }) => {
       period: "",
       soldDate: moment(),
       parkingDate: moment(),
+      isRnE: false,
+      RCM: "R",
       memo: "",
     });
   };
@@ -49,6 +53,8 @@ const CreateModal = ({ visible, onClose }) => {
       period,
       soldDate,
       parkingDate,
+      isRnE,
+      RCM,
       memo,
     } = form;
 
@@ -61,6 +67,8 @@ const CreateModal = ({ visible, onClose }) => {
       period,
       soldDate,
       parkingDate,
+      isRnE,
+      RCM,
       memo
     );
     onClose();
@@ -143,6 +151,31 @@ const CreateModal = ({ visible, onClose }) => {
         label="주차 일자"
         onChange={(value) => {
           handleInput("parkingDate", value);
+        }}
+      />
+      {form.payMethod === "cash" && (
+        <Fields.Dropdown
+          value={form.isRnE}
+          label="세계"
+          items={[
+            { label: "O", value: true },
+            { label: "X", value: false },
+          ]}
+          onChange={(value) => {
+            handleInput("isRnE", value);
+          }}
+        />
+      )}
+      <Fields.Dropdown
+        value={form.RCM}
+        label="RCM"
+        items={[
+          { label: "R", value: "R" },
+          { label: "C", value: "C" },
+          { label: "M", value: "M" },
+        ]}
+        onChange={(value) => {
+          handleInput("RCM", value);
         }}
       />
       <Fields.Text

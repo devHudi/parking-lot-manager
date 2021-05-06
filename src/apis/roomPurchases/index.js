@@ -1,7 +1,16 @@
 const { ipcRenderer } = window.require("electron");
 
-const create = (roomId, payMethod, bank, amount, fake, purchaseDate, memo) => {
-  console.log(roomId, bank, amount, fake, purchaseDate, memo);
+const create = (
+  roomId,
+  payMethod,
+  bank,
+  amount,
+  fake,
+  purchaseDate,
+  isRnE,
+  RCM,
+  memo
+) => {
   const data = ipcRenderer.sendSync("room-purchase-create", {
     roomId,
     payMethod,
@@ -9,6 +18,8 @@ const create = (roomId, payMethod, bank, amount, fake, purchaseDate, memo) => {
     amount,
     fake,
     purchaseDate,
+    isRnE,
+    RCM,
     memo,
   });
   return data;

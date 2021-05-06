@@ -35,6 +35,14 @@ const RoomPurchase = sequelize.define(
       type: DataTypes.DATE,
       allowNull: true,
     },
+    isRnE: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    RCM: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     memo: {
       type: DataTypes.STRING,
       allowNull: true,

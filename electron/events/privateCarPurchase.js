@@ -10,6 +10,8 @@ const init = () => {
       amount,
       fake,
       purchaseDate,
+      isRnE,
+      RCM,
       memo,
     } = args;
     event.returnValue = await Controllers.PrivateCarPurchase.create(
@@ -19,6 +21,8 @@ const init = () => {
       amount,
       fake,
       purchaseDate,
+      isRnE,
+      RCM,
       memo
     );
   });

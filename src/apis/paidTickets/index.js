@@ -9,6 +9,8 @@ const create = (
   period,
   soldDate,
   parkingDate,
+  isRnE,
+  RCM,
   memo
 ) => {
   const data = ipcRenderer.sendSync("paid-ticket-create", {
@@ -20,6 +22,8 @@ const create = (
     period,
     soldDate,
     parkingDate,
+    isRnE,
+    RCM,
     memo,
   });
   return data;
