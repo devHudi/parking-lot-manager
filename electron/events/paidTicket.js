@@ -4,32 +4,28 @@ const Controllers = require("../controllers");
 const init = () => {
   ipcMain.on("paid-ticket-create", async (event, args) => {
     const {
-      carNumber,
-      carType,
-      owner,
-      contact,
+      roomId,
       payMethod,
       depositor,
+      proof,
       bank,
       period,
+      amount,
       soldDate,
-      parkingDate,
       isRnE,
       RCM,
       memo,
     } = args;
 
     event.returnValue = await Controllers.PaidTicket.create(
-      carNumber,
-      carType,
-      owner,
-      contact,
+      roomId,
       payMethod,
       depositor,
       bank,
       period,
+      amount,
+      proof,
       soldDate,
-      parkingDate,
       isRnE,
       RCM,
       memo

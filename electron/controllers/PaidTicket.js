@@ -2,35 +2,37 @@ const PaidTicket = require("../models/PaidTicket");
 const Op = require("sequelize").Op;
 
 const create = async (
-  carNumber,
-  carType,
-  owner,
-  contact,
+  roomId,
   payMethod,
   depositor,
   bank,
   period,
+  amount,
+  proof,
   soldDate,
-  parkingDate,
   isRnE,
   RCM,
   memo
 ) => {
-  if (period !== "30M" && period !== "1H" && period !== "1D") {
+  if (
+    period !== "30M" &&
+    period !== "1H" &&
+    period !== "1D" &&
+    period !== "FREE" &&
+    period !== "WORK"
+  ) {
     throw new Error("Paid ticket period error");
   }
 
   return await PaidTicket.create({
-    carNumber,
-    carType,
-    owner,
-    contact,
+    roomId,
     payMethod,
     bank,
     depositor,
     period,
+    amount,
+    proof,
     soldDate,
-    parkingDate,
     isRnE,
     RCM,
     memo,

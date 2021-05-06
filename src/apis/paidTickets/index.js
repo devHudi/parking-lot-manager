@@ -1,31 +1,27 @@
 const { ipcRenderer } = window.require("electron");
 
 const create = (
-  carNumber,
-  carType,
-  owner,
-  contact,
+  roomId,
   payMethod,
   depositor,
   bank,
   period,
+  amount,
+  proof,
   soldDate,
-  parkingDate,
   isRnE,
   RCM,
   memo
 ) => {
   const data = ipcRenderer.sendSync("paid-ticket-create", {
-    carNumber,
-    carType,
-    owner,
-    contact,
+    roomId,
     payMethod,
     depositor,
     bank,
     period,
+    amount,
+    proof,
     soldDate,
-    parkingDate,
     isRnE,
     RCM,
     memo,

@@ -42,6 +42,10 @@ const cashColumns = [
     dataIndex: "room",
   },
   {
+    title: "내역",
+    dataIndex: "content",
+  },
+  {
     title: "주차권",
     dataIndex: "ticket",
   },
@@ -49,10 +53,10 @@ const cashColumns = [
     title: "월주차",
     dataIndex: "monthly",
   },
-  {
-    title: "원동기 자전거",
-    dataIndex: "bike",
-  },
+  // {
+  //   title: "원동기 자전거",
+  //   dataIndex: "bike",
+  // },
   {
     title: "세계",
     dataIndex: "isRnE",
@@ -89,10 +93,10 @@ const cardColumns = [
     title: "월주차",
     dataIndex: "monthly",
   },
-  {
-    title: "원동기 자전거",
-    dataIndex: "bike",
-  },
+  // {
+  //   title: "원동기 자전거",
+  //   dataIndex: "bike",
+  // },
   {
     title: "처리 (R/C/M)",
     dataIndex: "RCM",

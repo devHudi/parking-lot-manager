@@ -5,9 +5,16 @@ const PaidTicket = require("../models/PaidTicket");
 const RoomPurchase = require("../models/RoomPurchase");
 const PrivateCarPurchase = require("../models/PrivateCarPurchase");
 
-const calc = require("../utils/calc");
+const ticketData = {
+  FREE: 61,
+  "30M": 550,
+  "1H": 1100,
+  "1D": 11000,
+  WORK: 10000,
+};
 
 const getDetailReport = async (date, payMethod) => {
+  // 주차권
   const paidTickets = (
     await PaidTicket.findAll({
       where: {
@@ -23,9 +30,11 @@ const getDetailReport = async (date, payMethod) => {
   ).map((row) => {
     //TODO: paidTicket 구조 바뀌면 제대로 표시해야함 (시간당 가격, 티켓 수량, 호실 등)
     const {
+      roomId,
       bank,
       depositor,
       period,
+      amount,
       isRnE,
       RCM,
       memo,
@@ -34,20 +43,20 @@ const getDetailReport = async (date, payMethod) => {
     let ticket = 0;
     let text = "";
     if (period === "30M") {
-      ticket = 1;
       text = "30분";
     } else if (period === "1H") {
-      ticket = 2;
       text = "1시간";
     } else if (period === "1D") {
-      ticket = 3;
       text = "1일";
     }
 
+    ticket = ticketData[period] * amount;
+
     return {
+      room: roomId,
       type: "paidTicket",
       bank,
-      content: `${text}권 * ???`,
+      content: `${text}권 × ${amount}`,
       depositor,
       ticket,
       isRnE,
@@ -57,6 +66,7 @@ const getDetailReport = async (date, payMethod) => {
     };
   });
 
+  // 호실
   const roomPurchases = (
     await RoomPurchase.findAll({
       where: {
@@ -95,6 +105,7 @@ const getDetailReport = async (date, payMethod) => {
     };
   });
 
+  // 개인차량
   const privateCarPurchases = (
     await PrivateCarPurchase.findAll({
       where: {

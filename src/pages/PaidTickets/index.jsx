@@ -15,34 +15,32 @@ import CreateModal from "./CreateModal";
 
 const columns = [
   {
-    title: "차량번호",
-    dataIndex: "carNumber",
+    title: "호실",
+    dataIndex: "roomId",
   },
   {
-    title: "차종",
-    dataIndex: "carType",
-  },
-  {
-    title: "차주",
-    dataIndex: "owner",
-  },
-  {
-    title: "연락처",
-    dataIndex: "contact",
-  },
-  {
-    title: "주차 예정일",
-    dataIndex: "parknigDate",
-    render: (value) => moment(value).format(consts.DATE_FORMAT),
-  },
-  {
-    title: "시간",
+    title: "주차권",
     dataIndex: "period",
+    render: (value) => {
+      if (value === "FREE") return "무료주차";
+      else if (value === "30M") return "30분권";
+      else if (value === "1H") return "1시간권";
+      else if (value === "1D") return "1일권";
+      else if (value === "WORK") return "공사차량";
+    },
+  },
+  {
+    title: "개수",
+    dataIndex: "amount",
   },
   {
     title: "결제 수단",
     dataIndex: "payMethod",
     render: (value) => (value === "card" ? "카드" : "현금"),
+  },
+  {
+    title: "입금자",
+    dataIndex: "depositor",
   },
   {
     title: "수납 은행 (카드사)",
@@ -64,6 +62,15 @@ const columns = [
     render: (value) => moment(value).format(consts.DATE_FORMAT),
   },
   {
+    title: "지출 증빙",
+    dataIndex: "proof",
+    render: (value) => {
+      if (value === "taxBill") return "세금계산서";
+      else if (value === "cashReceipt") return "현금영수증";
+      else return "기타";
+    },
+  },
+  {
     title: "비고",
     dataIndex: "memo",
   },
@@ -79,8 +86,6 @@ const PaidTickets = () => {
   const [endDate, setEndDate] = useState(
     moment(new Date(), consts.DATE_FORMAT).toDate()
   );
-
-  console.log("rerendered");
 
   const forceUpdate = useForceUpdate();
 

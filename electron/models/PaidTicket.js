@@ -11,35 +11,7 @@ const PaidTicket = sequelize.define(
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    carNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    carType: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    owner: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    contact: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    payMethod: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    depositor: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    bank: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    period: {
+    roomId: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -47,8 +19,28 @@ const PaidTicket = sequelize.define(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    parkingDate: {
-      type: DataTypes.DATE,
+    payMethod: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    bank: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    depositor: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    period: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    proof: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
     isRnE: {

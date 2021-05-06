@@ -7,16 +7,14 @@ import { FormModal, Fields } from "components";
 
 const CreateModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({
-    carNumber: "",
-    carType: "",
-    owner: "",
-    contact: "",
+    roomId: "",
     payMethod: "cash",
     depositor: "",
     bank: "",
     period: "30M",
+    amount: 0,
+    proof: "taxBill",
     soldDate: new Date(),
-    parkingDate: new Date(),
     isRnE: false,
     RCM: "R",
     memo: "",
@@ -24,16 +22,14 @@ const CreateModal = ({ visible, onClose }) => {
 
   const clearForm = () => {
     setForm({
-      carNumber: "",
-      carType: "",
-      owner: "",
-      contact: "",
-      payMethod: "",
+      roomId: "",
+      payMethod: "cash",
       depositor: "",
       bank: "",
       period: "30M",
+      amount: 0,
+      proof: "taxBill",
       soldDate: new Date(),
-      parkingDate: new Date(),
       isRnE: false,
       RCM: "R",
       memo: "",
@@ -49,32 +45,30 @@ const CreateModal = ({ visible, onClose }) => {
 
   const handleOk = () => {
     const {
-      carNumber,
-      carType,
-      owner,
-      contact,
+      roomId,
       payMethod,
       depositor,
       bank,
       period,
+      amount,
+      proof,
       soldDate,
-      parkingDate,
       isRnE,
       RCM,
       memo,
     } = form;
 
+    console.log({ amount });
+
     paidTickets.create(
-      carNumber,
-      carType,
-      owner,
-      contact,
+      roomId,
       payMethod,
-      bank,
       payMethod === "cash" ? depositor : null,
+      bank,
       period,
+      amount,
+      proof,
       soldDate,
-      parkingDate,
       isRnE,
       RCM,
       memo
@@ -96,32 +90,18 @@ const CreateModal = ({ visible, onClose }) => {
       onCancel={handleCancel}
       onClose={onClose}
     >
-      <Fields.Text
-        label="차량번호"
-        value={form.carNumber}
+      <Fields.DatePicker
+        label="판매 일자"
+        value={moment(form.soldDate)}
         onChange={(value) => {
-          handleInput("carNumber", value);
+          handleInput("soldDate", value);
         }}
       />
       <Fields.Text
-        label="차종"
-        value={form.carType}
+        label="호실"
+        value={form.roomId}
         onChange={(value) => {
-          handleInput("carType", value);
-        }}
-      />
-      <Fields.Text
-        label="차주"
-        value={form.owner}
-        onChange={(value) => {
-          handleInput("owner", value);
-        }}
-      />
-      <Fields.Text
-        label="연락처"
-        value={form.contact}
-        onChange={(value) => {
-          handleInput("contact", value);
+          handleInput("roomId", value);
         }}
       />
       <Fields.Dropdown
@@ -153,28 +133,35 @@ const CreateModal = ({ visible, onClose }) => {
       )}
       <Fields.Dropdown
         value={form.period}
-        label="기간"
+        label="주차권"
         items={[
+          { label: "무료", value: "FREE" },
           { label: "30분", value: "30M" },
           { label: "1시간", value: "1H" },
           { label: "1일", value: "1D" },
+          { label: "공사차량", value: "WORK" },
         ]}
         onChange={(value) => {
           handleInput("period", value);
         }}
       />
-      <Fields.DatePicker
-        label="판매 일자"
-        value={moment(form.soldDate)}
+      <Fields.Number
+        label="개수"
+        value={form.amount}
         onChange={(value) => {
-          handleInput("soldDate", value);
+          handleInput("amount", value);
         }}
       />
-      <Fields.DatePicker
-        label="주차 일자"
-        value={moment(form.parkingDate)}
+      <Fields.Dropdown
+        value={form.proof}
+        label="지출 증빙"
+        items={[
+          { label: "세금계산서", value: "taxBill" },
+          { label: "현금영수증", value: "cashReceipt" },
+          { label: "기타", value: "etc" },
+        ]}
         onChange={(value) => {
-          handleInput("parkingDate", value);
+          handleInput("proof", value);
         }}
       />
       {form.payMethod === "cash" && (
