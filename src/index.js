@@ -3,12 +3,22 @@ import ReactDOM from "react-dom";
 
 import "antd/dist/antd.css";
 
+// routers
 import DefaultRouter from "routers";
 
+// redux
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "reducers";
+
+const store = createStore(rootReducer);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <DefaultRouter />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <DefaultRouter />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
