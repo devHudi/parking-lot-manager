@@ -24,7 +24,6 @@ ReactDOM.render(
 
 /*
   필수
-  TODO: 폼에서 공백체크
 */
 /*
   부수적 작업
