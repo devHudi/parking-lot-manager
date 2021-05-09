@@ -15,28 +15,15 @@ exports.create = async (year, month) => {
     .endOf("month")
     .toDate();
 
-  const alreadyGaveCarList = (
-    await PrivateCarAcc.findAll({
-      where: {
-        createdAt: {
-          [Op.between]: [startDate, endDate],
-        },
+  await PrivateCarAcc.destroy({
+    where: {
+      createdAt: {
+        [Op.between]: [startDate, endDate],
       },
-    })
-  )
-    .map((acc) => {
-      return acc.dataValues.privateCarId;
-    })
-    .reduce((acc, cur) => {
-      // 중복제거
-      if (acc.indexOf(cur) === -1) return [...acc, cur];
-      return acc;
-    }, []);
+    },
+  });
 
   const accs = privateCars
-    .filter((car) => {
-      return alreadyGaveCarList.indexOf(car.id.toString()) === -1;
-    })
     .map((car) => {
       const amount = 110000;
       return {

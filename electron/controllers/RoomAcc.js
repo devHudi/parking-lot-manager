@@ -15,24 +15,15 @@ exports.create = async (year, month) => {
     .endOf("month")
     .toDate();
 
-  const alreadyGaveRoomList = (
-    await RoomAcc.findAll({
-      where: {
-        createdAt: {
-          [Op.between]: [startDate, endDate],
-        },
+  await RoomAcc.destroy({
+    where: {
+      createdAt: {
+        [Op.between]: [startDate, endDate],
       },
-    })
-  )
-    .map((acc) => acc.dataValues.roomId)
-    .reduce((acc, cur) => {
-      // 중복제거
-      if (acc.indexOf(cur) === -1) return [...acc, cur];
-      return acc;
-    }, []);
+    },
+  });
 
   const accs = rooms
-    .filter((room) => alreadyGaveRoomList.indexOf(room.id) === -1)
     .map((room) => {
       const amount = 110000 * room.excessAmount;
       return {
