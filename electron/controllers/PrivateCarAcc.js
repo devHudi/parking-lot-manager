@@ -24,7 +24,9 @@ exports.create = async (year, month) => {
       },
     })
   )
-    .map((acc) => acc.dataValue.privateCarId)
+    .map((acc) => {
+      return acc.dataValues.privateCarId;
+    })
     .reduce((acc, cur) => {
       // 중복제거
       if (acc.indexOf(cur) === -1) return [...acc, cur];
@@ -32,19 +34,22 @@ exports.create = async (year, month) => {
     }, []);
 
   const accs = privateCars
-    .filter((car) => alreadyGaveCarList.indexOf(car.id) === -1)
+    .filter((car) => {
+      return alreadyGaveCarList.indexOf(car.id.toString()) === -1;
+    })
     .map((car) => {
       const amount = 110000;
       return {
         privateCarId: car.id,
         amount,
-        createdAt: moment([year, month - 1]),
+        createdAt: moment([year, month - 1]).toDate(),
       };
-    });
+    })
+    .filter((car) => car.amount !== 0);
 
-  const obj = PrivateCarAcc.bulkCreate(accs);
+  PrivateCarAcc.bulkCreate(accs);
 
-  return obj.dataValues;
+  return accs;
 };
 
 exports.findAll = async () => {

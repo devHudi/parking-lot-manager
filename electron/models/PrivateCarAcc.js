@@ -21,7 +21,7 @@ const PrivateCarAcc = sequelize.define(
     },
   },
   {
-    tableName: "privateCarAcc",
+    tableName: "privateCarAccs",
     freezeTableName: true,
   }
 );

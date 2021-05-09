@@ -133,8 +133,9 @@ const PrivateCarAccs = () => {
     alert(
       "부과처리를 시작합니다. 작업이 조금 오래걸릴 수 있으니 잠시만 기다려주세요."
     );
-    privateCarAccs.create(year, month);
+    const data = privateCarAccs.create(year, month);
     alert("부과처리가 완료되었습니다.");
+    if (data.length === 0) alert("이미 부과처리되어 추가된 데이터가 없습니다.");
     forceUpdate();
   };
 

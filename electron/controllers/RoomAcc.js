@@ -38,13 +38,14 @@ exports.create = async (year, month) => {
       return {
         roomId: room.id,
         amount,
-        createdAt: moment([year, month - 1]),
+        createdAt: moment([year, month - 1]).toDate(),
       };
-    });
+    })
+    .filter((room) => room.amount !== 0);
 
   RoomAcc.bulkCreate(accs);
 
-  return { rooms, startDate, endDate, alreadyGaveRoomList, accs };
+  return accs;
 };
 
 exports.findAll = async () => {
