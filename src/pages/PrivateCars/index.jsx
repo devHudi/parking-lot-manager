@@ -96,19 +96,7 @@ const PrivateCars = () => {
         onAddClick={() => setModal(true)}
         onRemoveClick={handleRemove}
         onRowClick={(data) => history.push(`/private-cars/${data.id}`)}
-      >
-        <Select
-          defaultValue="roomId"
-          onChange={(value) => setSearchMethod(value)}
-        >
-          <Select.Option value="roomId">호실</Select.Option>
-          <Select.Option value="company">입주사</Select.Option>
-          <Select.Option value="carNumber">차량번호</Select.Option>
-          <Select.Option value="carType">차종</Select.Option>
-          <Select.Option value="owner">차주</Select.Option>
-          <Select.Option value="contact">연락처</Select.Option>
-        </Select>
-      </PageTable>
+      />
     </>
   );
 };

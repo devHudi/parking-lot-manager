@@ -128,10 +128,6 @@ const Rooms = () => {
         <Button type="primary" icon={<BarcodeOutlined />} onClick={showConfirm}>
           금월 주차권 지급
         </Button>
-        <Select defaultValue="id" onChange={(value) => setSearchMethod(value)}>
-          <Select.Option value="id">호실</Select.Option>
-          <Select.Option value="company">입주사</Select.Option>
-        </Select>
       </PageTable>
     </>
   );
