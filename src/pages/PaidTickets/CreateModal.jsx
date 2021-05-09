@@ -1,7 +1,7 @@
 import { useState } from "react";
 import moment from "moment";
 
-import { paidTickets } from "apis";
+import { paidTickets, rooms } from "apis";
 
 import { FormModal, Fields } from "components";
 
@@ -58,21 +58,25 @@ const CreateModal = ({ visible, onClose }) => {
       memo,
     } = form;
 
-    console.log({ amount });
+    const isExists = rooms.isExists(roomId);
+    if (isExists) {
+      paidTickets.create(
+        roomId,
+        payMethod,
+        payMethod === "cash" ? depositor : null,
+        bank,
+        period,
+        amount,
+        proof,
+        soldDate,
+        isRnE,
+        RCM,
+        memo
+      );
+    } else {
+      alert("해당 호실이 존재하지 않습니다. 호실 입력을 다시 확인해주세요.");
+    }
 
-    paidTickets.create(
-      roomId,
-      payMethod,
-      payMethod === "cash" ? depositor : null,
-      bank,
-      period,
-      amount,
-      proof,
-      soldDate,
-      isRnE,
-      RCM,
-      memo
-    );
     onClose();
     clearForm();
   };
