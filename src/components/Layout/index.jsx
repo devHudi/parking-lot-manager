@@ -3,9 +3,15 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Layout, Menu } from "antd";
 import {
+  HomeOutlined,
+  MoneyCollectOutlined,
+  CarOutlined,
   UserOutlined,
   LaptopOutlined,
   NotificationOutlined,
+  ShoppingOutlined,
+  MessageOutlined,
+  ImportOutlined,
 } from "@ant-design/icons";
 
 import { Spinner } from "components";
@@ -25,6 +31,7 @@ const getMenuKey = (pathname) => {
     "private-cars",
     "private-car-accs",
     "paid-tickets",
+    "daily-report",
   ];
 
   return `${routes.indexOf(pathname.split("/")[1]) + 1}`;
@@ -51,42 +58,44 @@ const DefaultLayout = ({ children }) => {
               style={{ height: "100%", borderRight: 0 }}
             >
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<HomeOutlined />}
                 key="1"
                 onClick={() => history.push("/")}
               >
                 호실 관리
               </Menu.Item>
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<MoneyCollectOutlined />}
                 key="2"
                 onClick={() => history.push("/room-accs")}
               >
                 호실 수납 관리
               </Menu.Item>
+              <Menu.Divider />
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<CarOutlined />}
                 key="3"
                 onClick={() => history.push("/private-cars")}
               >
                 개인차량 관리
               </Menu.Item>
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<MoneyCollectOutlined />}
                 key="4"
                 onClick={() => history.push("/private-car-accs")}
               >
                 개인차량 수납 관리
               </Menu.Item>
+              <Menu.Divider />
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<ShoppingOutlined />}
                 key="5"
                 onClick={() => history.push("/paid-tickets")}
               >
                 주차권 판매 관리
               </Menu.Item>
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<MessageOutlined />}
                 key="6"
                 onClick={() => history.push("/daily-report")}
               >
@@ -94,7 +103,7 @@ const DefaultLayout = ({ children }) => {
               </Menu.Item>
               <Menu.Divider />
               <Menu.Item
-                icon={<LaptopOutlined />}
+                icon={<ImportOutlined />}
                 key="7"
                 onClick={() => console.log(fileDialog.importCsv())}
               >

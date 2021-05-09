@@ -161,6 +161,4 @@ const DailyReport = () => {
   );
 };
 
-// TODO: RCM하고 세계, 원동기 자전거, 비고, 카드사 는 어떻게 나와야 하는지 물어봐야함
-
 export default DailyReport;
