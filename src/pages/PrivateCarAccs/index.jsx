@@ -125,7 +125,10 @@ const PrivateCarAccs = () => {
   ];
 
   const handleCreate = () => {
-    if (curYear !== year || Number(curMonth) !== month) {
+    if (
+      Number(curYear) !== Number(year) ||
+      Number(curMonth) !== Number(month)
+    ) {
       const msg =
         "현재 날짜가 아닌 다른 날짜의 부과 처리를 시도하고 있습니다. 계산의 오차가 생길 수 있으니, 반드시 필요한 경우에만 다른 월자 부과처리를 해주시기 바랍니다.";
       if (!confirm(msg)) return; //eslint-disable-line
