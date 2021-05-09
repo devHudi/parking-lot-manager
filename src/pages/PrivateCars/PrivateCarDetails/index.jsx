@@ -57,15 +57,40 @@ const PrivateCarDetails = () => {
     });
   };
 
-  const handleOwner = (value) => {};
+  const handleOwner = (value) => {
+    setForm({
+      ...form,
+      owner: value,
+    });
+  };
 
-  const handleContact = (value) => {};
+  const handleContact = (value) => {
+    setForm({
+      ...form,
+      contact: value,
+    });
+  };
 
-  const handleCarNumber = (value) => {};
+  const handleCarNumber = (value) => {
+    setForm({
+      ...form,
+      carNumber: value,
+    });
+  };
 
-  const handleCarType = (value) => {};
+  const handleCarType = (value) => {
+    setForm({
+      ...form,
+      carType: value,
+    });
+  };
 
-  const handleCarRegisterAt = (value) => {};
+  const handleCarRegisterAt = (value) => {
+    setForm({
+      ...form,
+      carRegisterAt: value,
+    });
+  };
 
   const handleSave = () => {
     const { roomId, owner, contact, carNumber, carType, carRegisterAt } = form;
@@ -79,6 +104,8 @@ const PrivateCarDetails = () => {
       carType,
       carRegisterAt.toDate()
     );
+
+    alert("저장되었습니다.");
   };
 
   const handleRemove = () => {
