@@ -5,11 +5,15 @@ const Op = require("sequelize").Op;
 
 const PrivateCar = require("./PrivateCar");
 
-exports.create = async () => {
+exports.create = async (year, month) => {
   const privateCars = await PrivateCar.findAll();
 
-  const startDate = moment().startOf("month").toDate();
-  const endDate = moment().endOf("month").toDate();
+  const startDate = moment([year, month - 1])
+    .startOf("month")
+    .toDate();
+  const endDate = moment([year, month - 1])
+    .endOf("month")
+    .toDate();
 
   const alreadyGaveCarList = (
     await PrivateCarAcc.findAll({
@@ -34,6 +38,7 @@ exports.create = async () => {
       return {
         privateCarId: car.id,
         amount,
+        createdAt: moment([year, month - 1]),
       };
     });
 

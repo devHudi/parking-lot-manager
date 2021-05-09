@@ -1,7 +1,7 @@
 const { ipcRenderer } = window.require("electron");
 
-const create = () => {
-  const data = ipcRenderer.sendSync("room-acc-create");
+const create = (year, month) => {
+  const data = ipcRenderer.sendSync("room-acc-create", { year, month });
   return data;
 };
 

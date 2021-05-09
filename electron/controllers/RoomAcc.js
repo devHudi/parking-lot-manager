@@ -5,11 +5,15 @@ const Op = require("sequelize").Op;
 
 const RoomController = require("./Room");
 
-exports.create = async () => {
+exports.create = async (year, month) => {
   const rooms = await RoomController.findAll();
 
-  const startDate = moment().startOf("month").toDate();
-  const endDate = moment().endOf("month").toDate();
+  const startDate = moment([year, month - 1])
+    .startOf("month")
+    .toDate();
+  const endDate = moment([year, month - 1])
+    .endOf("month")
+    .toDate();
 
   const alreadyGaveRoomList = (
     await RoomAcc.findAll({
@@ -34,6 +38,7 @@ exports.create = async () => {
       return {
         roomId: room.id,
         amount,
+        createdAt: moment([year, month - 1]),
       };
     });
 

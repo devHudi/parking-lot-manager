@@ -109,7 +109,16 @@ const RoomAccs = () => {
   ];
 
   const handleCreate = () => {
-    roomAccs.create();
+    if (curYear !== year || Number(curMonth) !== month) {
+      const msg =
+        "현재 날짜가 아닌 다른 날짜의 부과 처리를 시도하고 있습니다. 다른 월자 부과 작업은 초과 지분량 현재 기준으로 부정확한 부과 처리가 될 수 있습니다. 반드시 필요한 경우에만 다른 월자 부과처리를 해주시기 바랍니다.";
+      if (!confirm(msg)) return; //eslint-disable-line
+    }
+    alert(
+      "부과처리를 시작합니다. 작업이 조금 오래걸릴 수 있으니 잠시만 기다려주세요."
+    );
+    roomAccs.create(year, month);
+    alert("부과처리가 완료되었습니다.");
     forceUpdate();
   };
 
