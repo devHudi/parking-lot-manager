@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Select, Input } from "antd";
 import { FileAddOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { SpaceBetween } from "components";
@@ -17,10 +17,19 @@ const PageTable = ({
   dataHandler,
 }) => {
   const [selected, setSelected] = useState([]);
+  const [searchColumn, setSearchColumn] = useState(columns[0].dataIndex);
+  const [search, setSearch] = useState("");
 
   const keyData = data
     ? data.map((row) => ({ ...row, key: JSON.stringify(row) }))
     : [];
+
+  const filteredData =
+    search !== ""
+      ? keyData.filter(
+          (row) => String(row[searchColumn]).indexOf(search) !== -1
+        )
+      : keyData;
 
   return (
     <>
@@ -50,6 +59,34 @@ const PageTable = ({
         </SpaceBetween>
       )}
 
+      <SpaceBetween
+        style={{ marginTop: "10px", marginBottom: noButtons ? "0" : "10px" }}
+      >
+        <SpaceBetween.Box>
+          <>
+            <Select
+              defaultValue={searchColumn}
+              style={{ width: "100px" }}
+              onChange={(value) => setSearchColumn(value)}
+            >
+              {columns.map((column) => (
+                <Select.Option value={column.dataIndex}>
+                  {column.title}
+                </Select.Option>
+              ))}
+            </Select>
+            <Input
+              placeholder="검색어"
+              allowClear
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              enterButton
+            />
+          </>
+        </SpaceBetween.Box>
+      </SpaceBetween>
+
       {noButtons && (
         <SpaceBetween style={{ marginBottom: "10px" }}>
           <SpaceBetween.Box>{children}</SpaceBetween.Box>
@@ -67,7 +104,7 @@ const PageTable = ({
           }
         }
         columns={columns}
-        dataSource={dataHandler ? dataHandler(keyData) : keyData}
+        dataSource={dataHandler ? dataHandler(filteredData) : filteredData}
         onRow={(record, rowIndex) => ({
           onClick: onRowClick
             ? () => onRowClick({ rowIndex, ...record })

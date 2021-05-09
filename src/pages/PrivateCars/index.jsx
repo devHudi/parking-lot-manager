@@ -108,14 +108,6 @@ const PrivateCars = () => {
           <Select.Option value="owner">차주</Select.Option>
           <Select.Option value="contact">연락처</Select.Option>
         </Select>
-        <Input
-          placeholder="검색어"
-          allowClear
-          onChange={(e) => {
-            setSearchKeyword(e.target.value);
-          }}
-          enterButton
-        />
       </PageTable>
     </>
   );

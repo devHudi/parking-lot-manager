@@ -12,6 +12,7 @@ const privateCarAcc = require("./privateCarAcc");
 const privateCarPurchase = require("./privateCarPurchase");
 const fileDialog = require("./fileDialog");
 const dailyReport = require("./dailyReport");
+const generatePdf = require("./generatePdf");
 
 const init = () => {
   db.connect();
@@ -28,6 +29,7 @@ const init = () => {
   privateCarPurchase();
   fileDialog();
   dailyReport();
+  generatePdf();
 };
 
 module.exports = { init };

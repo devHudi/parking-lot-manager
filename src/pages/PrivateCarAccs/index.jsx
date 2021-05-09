@@ -84,10 +84,10 @@ const PrivateCarAccs = () => {
       ),
     },
     {
-      title: "고지서 출력",
+      title: "고지서 생성",
       dataIndex: "print",
       render: (accId) => (
-        <Button icon={<PrinterOutlined />}>고지서 출력</Button>
+        <Button icon={<PrinterOutlined />}>고지서 생성</Button>
       ),
     },
     {
@@ -123,7 +123,7 @@ const PrivateCarAccs = () => {
       />
       <PageTitle
         title="개인차량 수납/부과 관리"
-        subtitle="개인이 직접 등록한 차량에 부과하여 수납관리 및 고지서 출력을 할 수 있습니다."
+        subtitle="개인이 직접 등록한 차량에 부과하여 수납관리 및 고지서 생성을 할 수 있습니다."
       />
       <SpaceBetween>
         <div>

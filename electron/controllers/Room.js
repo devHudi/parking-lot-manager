@@ -1,4 +1,5 @@
 const Op = require("sequelize").Op;
+const moment = require("moment");
 
 const Room = require("../models/Room");
 const Car = require("../models/Car");
@@ -214,7 +215,18 @@ exports.getAccTable = async (year, month) => {
         roomId: room.id,
         company: room.company,
         accView: room.id,
-        print: acc.id,
+        print: {
+          room: room.id,
+          accId: acc.id,
+          accAmount: acc.amount,
+          startDate: moment([year, month - 1, 1]).toDate(),
+          endDate: moment([year, month - 1, 1])
+            .endOf("month")
+            .toDate(),
+          deadlineDate: moment([year, month - 2, 1])
+            .endOf("month")
+            .toDate(),
+        },
         purchase: room.id,
         accAmount: acc.amount,
         purchaseAmount,

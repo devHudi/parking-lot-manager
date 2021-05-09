@@ -132,14 +132,6 @@ const Rooms = () => {
           <Select.Option value="id">호실</Select.Option>
           <Select.Option value="company">입주사</Select.Option>
         </Select>
-        <Input
-          placeholder="검색어"
-          allowClear
-          onChange={(e) => {
-            setSearchKeyword(e.target.value);
-          }}
-          enterButton
-        />
       </PageTable>
     </>
   );
