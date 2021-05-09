@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { showSpinner, hideSpinner } from "reducers/spinner";
+import { useState, useEffect } from "react";
 import { DatePicker } from "antd";
 import moment from "moment";
 
@@ -77,22 +75,18 @@ const columns = [
 ];
 
 const PaidTickets = () => {
-  const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
 
   const [startDate, setStartDate] = useState(
     moment(moment().subtract(1, "months"), consts.DATE_FORMAT).toDate()
   );
   const [endDate, setEndDate] = useState(
-    moment(new Date(), consts.DATE_FORMAT).toDate()
+    moment(new Date(), consts.DATE_FORMAT).endOf("day").toDate()
   );
 
   const forceUpdate = useForceUpdate();
 
-  dispatch(showSpinner);
   const data = paidTickets.findAll(startDate, endDate);
-  dispatch(hideSpinner);
-  // TODO: 검색 기능 추가
 
   const handleRemove = (selected) => {
     const idList = selected.map((row) => row.id);
