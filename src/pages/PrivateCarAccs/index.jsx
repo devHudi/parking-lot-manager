@@ -13,7 +13,7 @@ import _ from "lodash";
 
 import { range } from "utils/calc";
 
-import { privateCars, privateCarAccs, privateCarPurchases } from "apis";
+import { privateCars, privateCarAccs, generatePdf } from "apis";
 
 import { useForceUpdate } from "hooks";
 
@@ -86,8 +86,25 @@ const PrivateCarAccs = () => {
     {
       title: "고지서 생성",
       dataIndex: "print",
-      render: (accId) => (
-        <Button icon={<PrinterOutlined />}>고지서 생성</Button>
+      render: (print) => (
+        <Button
+          icon={<PrinterOutlined />}
+          onClick={() => {
+            const result = generatePdf.generate(
+              print.room,
+              print.accAmount,
+              print.startDate,
+              print.endDate,
+              print.deadlineDate,
+              print.carNumber
+            );
+            if (result)
+              alert("고지서가 생성되었습니다. 선택한 폴더를 확인해주세요.");
+            else alert("고지서가 생성이 취소되거나 실패하였습니다.");
+          }}
+        >
+          고지서 생성
+        </Button>
       ),
     },
     {

@@ -6,7 +6,7 @@ const pdf = require("pdf-creator-node");
 
 const init = () => {
   ipcMain.on("generate-pdf", async (event, args) => {
-    const { room, amount, startDate, endDate, deadlineDate } = args;
+    const { room, amount, startDate, endDate, deadlineDate, carNumber } = args;
 
     let dirPath = dialog.showOpenDialogSync({
       properties: ["openDirectory"],
@@ -34,6 +34,7 @@ const init = () => {
       html: html,
       data: {
         room,
+        carNumber: carNumber ? `(개인차량 ${carNumber})` : "",
         amount: amount.toString(),
         startDate: moment(startDate).format("YYYY년 MM월 DD일"),
         endDate: moment(endDate).format("YYYY년 MM월 DD일"),

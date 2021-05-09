@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 const PrivateCar = require("../models/PrivateCar");
 const PrivateCarPurchase = require("../models/PrivateCarPurchase");
 const PrivateCarAcc = require("../models/PrivateCarAcc");
@@ -120,7 +122,19 @@ exports.getAccTable = async (year, month) => {
         owner: car.owner,
         contact: car.contact,
         accView: car.id,
-        print: acc.id,
+        print: {
+          room: room.id,
+          carNumber: car.carNumber,
+          accId: acc.id,
+          accAmount: acc.amount,
+          startDate: moment([year, month - 1, 1]).toDate(),
+          endDate: moment([year, month - 1, 1])
+            .endOf("month")
+            .toDate(),
+          deadlineDate: moment([year, month - 2, 1])
+            .endOf("month")
+            .toDate(),
+        },
         purchase: car.id,
         accAmount: acc.amount,
         purchaseAmount,
