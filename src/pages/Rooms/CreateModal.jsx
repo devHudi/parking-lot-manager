@@ -3,6 +3,8 @@ import { FormModal, Fields } from "components";
 
 import { rooms } from "apis";
 
+import { nullCheck } from "utils/formCheck";
+
 const CreateRoomModal = ({ visible, onClose }) => {
   const [form, setForm] = useState({
     room: "",
@@ -31,6 +33,11 @@ const CreateRoomModal = ({ visible, onClose }) => {
 
   const handleOk = () => {
     const { room, company, type, areaM, memo } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
 
     const isExists = rooms.isExists(room);
     if (isExists) {

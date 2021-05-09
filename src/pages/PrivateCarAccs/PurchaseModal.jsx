@@ -2,6 +2,8 @@ import { useState } from "react";
 import moment from "moment";
 import { FormModal, Fields } from "components";
 
+import { nullCheck } from "utils/formCheck";
+
 import { privateCarPurchases } from "apis";
 
 const PurchaseModal = ({ visible, privateCarId, onClose }) => {
@@ -50,6 +52,12 @@ const PurchaseModal = ({ visible, privateCarId, onClose }) => {
       RCM,
       memo,
     } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
+
     privateCarPurchases.create(
       privateCarId,
       payMethod,

@@ -3,6 +3,8 @@ import { FormModal, Fields } from "components";
 
 import { freeTickets } from "apis";
 
+import { nullCheck } from "utils/formCheck";
+
 const CreateFreeTicketModal = ({ visible, roomId, onClose }) => {
   const [form, setForm] = useState({});
 
@@ -19,6 +21,12 @@ const CreateFreeTicketModal = ({ visible, roomId, onClose }) => {
 
   const handleOk = () => {
     const { amount, memo } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
+
     freeTickets.create(roomId, amount, "GET", memo);
     onClose();
     clearForm();

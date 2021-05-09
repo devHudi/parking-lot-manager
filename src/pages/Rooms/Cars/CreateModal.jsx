@@ -3,6 +3,8 @@ import { FormModal, Fields } from "components";
 
 import { cars } from "apis";
 
+import { nullCheck } from "utils/formCheck";
+
 const CreateModal = ({ visible, roomId, onClose }) => {
   const [form, setForm] = useState({
     carNumber: "",
@@ -31,6 +33,12 @@ const CreateModal = ({ visible, roomId, onClose }) => {
 
   const handleOk = () => {
     const { carNumber, carType, owner, contact, memo } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
+
     cars.create(roomId, carNumber, carType, owner, contact, memo);
     onClose();
     clearForm();

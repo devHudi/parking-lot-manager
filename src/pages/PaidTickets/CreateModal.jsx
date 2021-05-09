@@ -2,6 +2,7 @@ import { useState } from "react";
 import moment from "moment";
 
 import { paidTickets, rooms } from "apis";
+import { nullCheck } from "utils/formCheck";
 
 import { FormModal, Fields } from "components";
 
@@ -58,6 +59,11 @@ const CreateModal = ({ visible, onClose }) => {
       memo,
     } = form;
 
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
+
     const isExists = rooms.isExists(roomId);
     if (isExists) {
       paidTickets.create(
@@ -76,6 +82,8 @@ const CreateModal = ({ visible, onClose }) => {
     } else {
       alert("해당 호실이 존재하지 않습니다. 호실 입력을 다시 확인해주세요.");
     }
+
+    alert("주차권이 추가되었습니다.");
 
     onClose();
     clearForm();

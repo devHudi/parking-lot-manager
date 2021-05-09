@@ -4,6 +4,8 @@ import { FormModal, Fields } from "components";
 
 import { stakeTransfers, rooms } from "apis";
 
+import { nullCheck } from "utils/formCheck";
+
 const CreateModal = ({ visible, onClose }) => {
   const { roomId } = useParams();
   const [form, setForm] = useState({
@@ -25,6 +27,11 @@ const CreateModal = ({ visible, onClose }) => {
 
   const handleOk = () => {
     const { room: receiveRoomId, amount, memo } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
 
     const isExists = rooms.isExists(receiveRoomId);
     if (isExists) {

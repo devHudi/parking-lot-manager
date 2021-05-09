@@ -4,6 +4,8 @@ import { FormModal, Fields } from "components";
 
 import { roomPurchases } from "apis";
 
+import { nullCheck } from "utils/formCheck";
+
 const PurchaseModal = ({ visible, roomId, onClose }) => {
   const [form, setForm] = useState({
     payMethod: "cash",
@@ -50,6 +52,12 @@ const PurchaseModal = ({ visible, roomId, onClose }) => {
       RCM,
       memo,
     } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
+
     roomPurchases.create(
       roomId,
       payMethod,

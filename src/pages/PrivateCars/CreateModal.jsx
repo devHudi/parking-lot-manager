@@ -2,6 +2,8 @@ import { useState } from "react";
 import moment from "moment";
 import { FormModal, Fields } from "components";
 
+import { nullCheck } from "utils/formCheck";
+
 import { privateCars, rooms } from "apis";
 
 const CreateModal = ({ visible, onClose }) => {
@@ -28,6 +30,11 @@ const CreateModal = ({ visible, onClose }) => {
       memo,
       carRegisterAt,
     } = form;
+
+    if (!nullCheck(form)) {
+      alert("모든 내용을 채워주세요.");
+      return;
+    }
 
     const isExists = rooms.isExists(roomId);
     if (isExists) {
