@@ -19,6 +19,28 @@ const init = () => {
     }
     event.returnValue = null;
   });
+
+  ipcMain.on("import-database", async (event, args) => {
+    const filePath = dialog.showOpenDialogSync({
+      properties: ["openFile"],
+    });
+    if (filePath !== undefined) {
+      fs.copyFileSync(filePath[0], "database.sqlite");
+    }
+
+    event.returnValue = null;
+  });
+
+  ipcMain.on("export-database", async (event, args) => {
+    const dirPath = dialog.showOpenDialogSync({
+      properties: ["openDirectory"],
+    });
+    if (dirPath !== undefined) {
+      fs.copyFileSync("database.sqlite", dirPath[0] + "/database.sqlite");
+    }
+
+    event.returnValue = null;
+  });
 };
 
 module.exports = init;

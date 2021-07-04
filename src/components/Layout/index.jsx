@@ -102,12 +102,26 @@ const DefaultLayout = ({ children }) => {
                 주차 일일 정산
               </Menu.Item>
               <Menu.Divider />
-              <Menu.Item
+              {/* <Menu.Item
                 icon={<ImportOutlined />}
                 key="7"
                 onClick={() => console.log(fileDialog.importCsv())}
               >
                 엑셀에서 불러오기
+              </Menu.Item> */}
+              <Menu.Item
+                icon={<ImportOutlined />}
+                key="8"
+                onClick={() => console.log(fileDialog.importDB())}
+              >
+                DB 가져오기
+              </Menu.Item>
+              <Menu.Item
+                icon={<ImportOutlined />}
+                key="9"
+                onClick={() => console.log(fileDialog.exportDB())}
+              >
+                DB 내보내기
               </Menu.Item>
             </Menu>
           </Sider>
